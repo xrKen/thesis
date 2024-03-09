@@ -1,0 +1,72 @@
+<tr class="tr-shadow">
+    <!-- modal scroll -->
+<div class="modal fade" id="<%= reqForm._id %>" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width: 80%;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scrollmodalLabel">Requestor: <%= reqForm.requestorName %></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" >
+                <iframe src="public/upload/pdf/<%= reqForm.userId %>/<%= reqForm.requestorName %>/<%= reqForm._id %>.pdf" width="100%" height="800px" ></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal scroll -->
+    <td><%= user.assign %></td>
+    <td><%= user.fullname %></td>
+    <td>
+        <span class="block-email"><%= user.email %></span>
+    </td>
+    <td><%= reqForm.dateCreated %></td>
+    <% if(reqForm.status === 'approved' || reqForm.status === 'settled') { %>
+    <td><button type="button" data-toggle="modal" data-target="#<%= reqForm._id %>" style="color: dodgerblue;">View PDF</button></td>
+    <% } %>
+    <td>
+        <span class="status--<%= reqForm.status %>"><%= reqForm.status %></span>
+    </td>
+    
+    <td><%= reqForm.requestorName %></td>
+    <td> 
+        <% if(reqForm.status === 'pending') {%>
+        <form action="deleteForm" method="post">
+            <div class="table-data-feature justify-content-center">
+                <input type="hidden" name="formId" id="formId" value="<%= reqForm._id %>">
+                <button type="submit" class="item delete" data-toggle="tooltip"
+                    data-placement="top" title="Delete">
+                    <i class="zmdi zmdi-delete"></i>
+                </button>
+            </div>
+        </form>
+        <% } else if(reqForm.status === 'process'){ %>
+            <p class="text-right">Waiting for Approval</p>
+        <% } else if(reqForm.status === 'settled') {%>
+            <form action="deleteForm" method="post">
+                <div class="table-data-feature justify-content-center">
+                    <input type="hidden" name="formId" id="formId" value="<%= reqForm._id %>">
+                    <button type="submit" class="item delete" data-toggle="tooltip"
+                        data-placement="top" title="Delete">
+                        <i class="zmdi zmdi-delete"></i>
+                    </button>
+                </div>
+            </form>
+        <% } else if(reqForm.status === 'declined') {%>
+            <form action="deleteForm" method="post">
+                <div class="table-data-feature justify-content-center">
+                    <input type="hidden" name="formId" id="formId" value="<%= reqForm._id %>">
+                    <button type="submit" class="item delete" data-toggle="tooltip"
+                        data-placement="top" title="Delete">
+                        <i class="zmdi zmdi-delete"></i>
+                    </button>
+                </div>
+            </form>
+        <% } else if(reqForm.status === 'approved') {%>
+            <p class="text-right">Waiting End Contract</p>
+        <% } %>
+    </td>
+    
+</tr>
+<tr class="spacer"></tr>

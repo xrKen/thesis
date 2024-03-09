@@ -1,0 +1,57 @@
+
+<body>
+    <form action="" method="post">
+        <div class="text-justify" style="font-size: 16px;">
+            <br/><br/>
+            <p style="font-weight: bold;">Date: <span style="font-weight: bold;"><%= formData.dateCreated %></span></p>
+            <br/>
+            <p style="font-weight: bold;">Address: <span style="font-weight: bold;"><%= formData.address %></span></p>
+            <br/> <br/>
+            <p>Name of <span style="font-weight: bold;">Mayor/Elected</span> officer in your place Address of the Municipal</p> 
+            <br/> <br/>
+            To whom it may concer, Good day, I am so gald for being a part of this place here in our city 
+            <span style="font-weight: bold;"><%= formData.city %></span>, 
+            because of outstanding performance in terms of communicating in the ordinary people and giving as an access to barrow some equipmens. 
+            For Know I respectfully need equipment that we will be use in a important 
+            <span style="font-weight: bold;"><%= formData.event %></span>. Thanks for considering me.
+            <br/> <br/> 
+            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum
+            faucibus dolor auctor.
+            <br> <br/>
+            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+            Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+            <br/> <br/> <br/>
+            <% if (Array.isArray(selectedVehicles) && selectedVehicles.length > 0) { %>
+                <h3 style="margin-bottom: 10px;">Selected Vehicles</h3>
+                <table style="border-collapse: collapse; width: 100%;">
+                    <thead>
+                        <tr style="background-color: #f2f2f2;">
+                            <th style="padding: 8px; border: 1px solid #ddd;">Vehicle</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% selectedVehicles.forEach(vehicle => { %>
+                            <tr>
+                                <td style="padding: 8px; border: 1px solid #ddd;"><%= vehicle.vehicleId %></td>
+                                <td style="padding: 8px; border: 1px solid #ddd;"><%= vehicle.qty %></td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            <% } else { %>
+                <p>No vehicles selected.</p>
+            <% } %>
+            
+            
+            
+            
+            
+            <br/><br/><br/>
+            Sincerely Yours, <br/>
+            <span style="font-weight: bold;"><%= formData.requestorName %></span> 
+            <br/> <br/>
+        </div>
+    </form>
+</body>
+

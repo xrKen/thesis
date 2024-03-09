@@ -1,0 +1,352 @@
+<%- include('partials/header/header.ejs'); %>
+
+    <body class="">
+        <div class="page-wrapper">
+            <%- include('partials/nav_bar/nav.ejs'); %>
+                <%- include('partials/nav_bar/nav_mobile.ejs'); %>
+                    <%- include('./partials/nav_bar/nav_mobile_bottom.ejs'); %>
+                    <!-- END HEADER MOBILE -->
+
+                    <!-- PAGE CONTENT-->
+                    <div class="page-content--bgf7">
+                        <!-- BREADCRUMB-->
+                        <section class="au-breadcrumb2">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="au-breadcrumb-content">
+                                            <div class="au-breadcrumb-left">
+                                                <span class="au-breadcrumb-span">You are here:</span>
+                                                <ul class="list-unstyled list-inline au-breadcrumb__list">
+                                                    <li class="list-inline-item active">
+                                                        <a href="#">Home</a>
+                                                    </li>
+                                                    <li class="list-inline-item seprate">
+                                                        <span>/</span>
+                                                    </li>
+                                                    <li class="list-inline-item">Dashboard</li>
+                                                </ul>
+                                            </div>
+                                            <form class="au-form-icon--sm" action="" method="post">
+                                                <input class="au-input--w300 au-input--style2" type="text"
+                                                    placeholder="Search for datas &amp; reports...">
+                                                <button class="au-btn--submit2" type="submit">
+                                                    <i class="zmdi zmdi-search"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- END BREADCRUMB-->
+
+                        <!-- WELCOME-->
+                        <%- include('./partials/welcome/welcome.ejs'); %>
+                        <!-- END WELCOME-->
+
+                        <!-- box -->
+                        <section class="statistic statistic2">
+                            <div class="container">
+                                <div class="row m-t-25 ">
+                                    <div class="col-sm-6 col-lg-3 text-center">
+                                        <div class="overview-item overview-item--c1">
+                                            <div class="overview__inner">
+                                                <div class="overview-box clearfix">
+                                                    <div class="icon">
+                                                        <i class="zmdi zmdi-account-o"></i>
+                                                    </div>
+                                                    <div class="text">
+                                                        <% if(reqForm && reqForm.length > 0) { %>
+                                                            <h2><%= reqForm.length %></h2>
+                                                        <% }else { %>
+                                                            <h2>0</h2>
+                                                        <% } %>
+                                                        <span>Request</span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-3 text-center ">
+                                        <div class="overview-item overview-item--c2">
+                                            <div class="overview__inner">
+                                                <div class="overview-box clearfix">
+                                                    <div class="icon">
+                                                        <i class="zmdi zmdi-shopping-cart"></i>
+                                                    </div>
+                                                    <div class="text">
+                                                        <%
+                                                        const approvedForms = reqForms.filter(form => form.status === 'settled');
+                                                        const approvedFormsCount = approvedForms.length;
+                                                        %>
+                                                        <% if(reqForms && reqForms.length > 0) { %>
+                                                            <h2><%= approvedFormsCount %></h2>
+                                                        <% } else { %>
+                                                            <h2>0</h2>
+                                                        <% } %>
+                                                        <span>Done Contract</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-3 text-center">
+                                        <div class="overview-item overview-item--c3">
+                                            <div class="overview__inner">
+                                                <div class="overview-box clearfix">
+                                                    <div class="icon">
+                                                        <i class="zmdi zmdi-calendar-note"></i>
+                                                    </div>
+                                                    <div class="text">
+                                                        <h2><%= submissionCount %>/10</h2>
+                                                        <span>This day</span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-3 text-center">
+                                        <div class="overview-item overview-item--c4">
+                                            <div class="overview__inner">
+                                                <div class="overview-box clearfix">
+                                                    <div class="icon">
+                                                        <i class="zmdi zmdi-account-calendar"></i>
+                                                    </div>
+                                                    <div class="text">
+                                                        <% if(reqForms && reqForms.length > 0) { %>
+                                                            <h2><%= reqForms.length %></h2>
+                                                        <% }else { %>
+                                                            <h2>0</h2>
+                                                        <% } %>
+                                                        <span>Total Request</span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- box -->
+
+                                    <!-- Request Approval List-->
+                                    <section class="p-t-20">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h3 class="title-5 m-b-35">Waiting For Approval</h3>
+                                                    <!-- <div class="table-data__tool">
+                                                        <div class="table-data__tool-left">
+                                                            <div class="rs-select2--light rs-select2--md">
+                                                                <select class="js-select2" name="property">
+                                                                    <option selected="selected">All Properties</option>
+                                                                    <option value="">Option 1</option>
+                                                                    <option value="">Option 2</option>
+                                                                </select>
+                                                                <div class="dropDownSelect2"></div>
+                                                            </div>
+                                                            <div class="rs-select2--light rs-select2--sm">
+                                                                <select class="js-select2" name="time">
+                                                                    <option selected="selected">Today</option>
+                                                                    <option value="">3 Days</option>
+                                                                    <option value="">1 Week</option>
+                                                                </select>
+                                                                <div class="dropDownSelect2"></div>
+                                                            </div>
+                                                            <button class="au-btn-filter">
+                                                                <i class="zmdi zmdi-filter-list"></i>filters</button>
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="table-responsive table-responsive-data2">
+                                                        <table class="table table-data2 text-center" style="white-space: nowrap;">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Requested By</th>
+                                                                    <th>assign</th>
+                                                                    <th>email</th>
+                                                                    <th>date Created</th>
+                                                                    <th>form</th>
+                                                                    <th>status</th>
+                                                                    <th>requestor</th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <!-- request && modal Loop start -->
+                                                                <% if(reqForms && reqForms.length > 0) { %>
+                                                                    <% for (let i = 0; i < reqForms.length; i++) { %>
+                                                                        <% const reqForm = reqForms[i]; %>
+                                                                        <% if(reqForm.status === 'process') { %>
+                                                                            <% const user = users.find(user => user._id.toString() === reqForm.userId.toString()); %>
+                                                                            <% if(user) { %>
+                                                                                <!-- Include the partial template -->
+                                                                                <%- include('partials/request_form/admin_single_form.ejs', { reqForm: reqForm, user: user }); %>
+                                                                            <% } %>
+                                                                        <% } %>
+                                                                    <% } %>
+                                                                <% } else { %>
+                                                                    <p>No requests found.</p>
+                                                                <% } %>
+                                                                <!-- request && modal Loop end -->
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <!-- END request Approval list TABLE-->
+
+                                    <% if (reqForms && reqForms.length > 0 && reqForms.some(reqForm => reqForm.status === 'approved')) { %>
+                                    <!-- all Request approved start-->
+                                    <section class="p-t-50">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h3 class="title-5 m-b-35">Approved Request</h3>
+                                                    <div class="table-data__tool">
+                                                        <div class="table-data__tool-left">
+                                                            <div class="rs-select2--light rs-select2--md">
+                                                                <select class="js-select2" name="property">
+                                                                    <option selected="selected">All Properties</option>
+                                                                    <option value="">Option 1</option>
+                                                                    <option value="">Option 2</option>
+                                                                </select>
+                                                                <div class="dropDownSelect2"></div>
+                                                            </div>
+                                                            <div class="rs-select2--light rs-select2--sm">
+                                                                <select class="js-select2" name="time">
+                                                                    <option selected="selected">Today</option>
+                                                                    <option value="">3 Days</option>
+                                                                    <option value="">1 Week</option>
+                                                                </select>
+                                                                <div class="dropDownSelect2"></div>
+                                                            </div>
+                                                            <button class="au-btn-filter">
+                                                                <i class="zmdi zmdi-filter-list"></i>filters</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="table-responsive table-responsive-data2">
+                                                        <table class="table table-data2 text-center" style="white-space: nowrap;">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Requested By</th>
+                                                                    <th>assign</th>
+                                                                    <th>email</th>
+                                                                    <th>date approved</th>
+                                                                    <th>form</th>
+                                                                    <th>status</th>
+                                                                    <th>requestor</th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <!-- request && modal Loop start -->
+                                                                <% if(reqForms && reqForms.length > 0) { %>
+                                                                    <% for (let i = 0; i < reqForms.length; i++) { %>
+                                                                        <% const reqForm = reqForms[i]; %>
+                                                                        <% if(reqForm.status === 'approved') { %>
+                                                                            <% const user = users.find(user => user._id.toString() === reqForm.userId.toString()); %>
+                                                                            <% if(user) { %>
+                                                                                <!-- Include the partial template -->
+                                                                                <%- include('partials/request_form/admin_single_form_remove.ejs', { reqForm: reqForm, user: user }); %>
+                                                                            <% } %>
+                                                                        <% } %>
+                                                                    <% } %>
+                                                                <% } else { %>
+                                                                    <p>No requests found.</p>
+                                                                <% } %>
+                                                                <!-- request && modal Loop end -->
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <!-- all Request approved end-->
+                                    <% } %>
+                                    <% if (reqForms && reqForms.length > 0 && reqForms.some(reqForm => reqForm.status === 'settled')) { %>
+                                        <!-- all Request Settled start-->
+                                        <section class="p-t-50">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <h3 class="title-5 m-b-35">Settled Request</h3>
+                                                        <div class="table-data__tool">
+                                                            <div class="table-data__tool-left">
+                                                                <div class="rs-select2--light rs-select2--md">
+                                                                    <select class="js-select2" name="property">
+                                                                        <option selected="selected">All Properties</option>
+                                                                        <option value="">Option 1</option>
+                                                                        <option value="">Option 2</option>
+                                                                    </select>
+                                                                    <div class="dropDownSelect2"></div>
+                                                                </div>
+                                                                <div class="rs-select2--light rs-select2--sm">
+                                                                    <select class="js-select2" name="time">
+                                                                        <option selected="selected">Today</option>
+                                                                        <option value="">3 Days</option>
+                                                                        <option value="">1 Week</option>
+                                                                    </select>
+                                                                    <div class="dropDownSelect2"></div>
+                                                                </div>
+                                                                <button class="au-btn-filter">
+                                                                    <i class="zmdi zmdi-filter-list"></i>filters</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="table-responsive table-responsive-data2">
+                                                            <table class="table table-data2 text-center" style="white-space: nowrap;">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Requested By</th>
+                                                                        <th>assign</th>
+                                                                        <th>email</th>
+                                                                        <th>date approved</th>
+                                                                        <th>form</th>
+                                                                        <th>status</th>
+                                                                        <th>requestor</th>
+                                                                        
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <!-- request && modal Loop start -->
+                                                                    <% if(reqForms && reqForms.length > 0) { %>
+                                                                        <% for (let i = 0; i < reqForms.length; i++) { %>
+                                                                            <% const reqForm = reqForms[i]; %>
+                                                                            <% if(reqForm.status === 'settled') { %>
+                                                                                <% const user = users.find(user => user._id.toString() === reqForm.userId.toString()); %>
+                                                                                <% if(user) { %>
+                                                                                    <!-- Include the partial template -->
+                                                                                    <%- include('partials/request_form/admin_single_form_remove.ejs', { reqForm: reqForm, user: user }); %>
+                                                                                <% } %>
+                                                                            <% } %>
+                                                                        <% } %>
+                                                                    <% } else { %>
+                                                                        <p>No requests found.</p>
+                                                                    <% } %>
+                                                                    <!-- request && modal Loop end -->
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <!-- all Request Settled end-->
+                                        <% } %>
+                                    <!-- request modal start -->
+                                    <%- include('./partials/modal/modal_request.ejs', { vehicles:vehicles}); %>
+                                        <!-- request modal end-->
+
+                                        <%- include('./partials/modal/modal_vehicle.ejs'); %>
+
+                                        <%- include('./partials/copyright/copyright.ejs'); %>
+                    </div>
+        </div>
+
+        <%- include('partials/footer/footer.ejs'); %>

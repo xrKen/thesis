@@ -1,0 +1,68 @@
+<!-- HEADER MOBILE-->
+<header class="header-mobile header-mobile-2 d-block d-lg-none">
+    <div class="header-mobile__bar">
+        <div class="container-fluid">
+            <div class="header-mobile-inner">
+                <a class="logo" href="index.html">
+                    <img src="/public/img/logo.jpg" alt="SomethingG" style="width: 55px; height: 55px; border-radius: 50%;"/>
+                </a>
+                <button class="hamburger hamburger--slider" type="button">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar-mobile">
+        <div class="container-fluid">
+            <ul class="navbar-mobile__list list-unstyled">
+                <li class="has-sub">
+                    <% if(user.role === 'member') { %>
+                    <li>
+                        <a href="/">
+                            <i class="fas fa-home"></i>Home</a>
+                    </li>
+                    <li>
+                        <a href="/requests">
+                            <i class="fas fa-copy"></i>Requests</a>
+                    </li>
+                    <% } %>
+                    <% if(user.role === 'creator') { %>
+                    <li>
+                        <a href="/vehicles">
+                            <i class="fas fa-home"></i>Home</a>
+                    </li>
+                    <li>
+                        <a href="/inventory">
+                            <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                    </li>
+                    <% } %>
+                    <% if(user.role === 'admin') { %>
+                    <li>
+                        <a href="/admin">
+                            <i class="fas fa-home"></i>Home</a>
+                    </li>
+                    <li>
+                        <a href="/dashboard">
+                            <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                    </li>
+                    <% } %>
+                </li>
+                <!-- <li>
+                    <a href="">
+                        <i class="fas fa-trophy"></i>Features</a>
+                </li>
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-copy"></i>Pages</a>
+                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                        <li>
+                            <a href="/login">Login</a>
+                        </li>
+                    </ul>
+                </li> -->
+            </ul>
+        </div>
+    </nav>
+</header>

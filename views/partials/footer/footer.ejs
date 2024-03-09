@@ -1,0 +1,56 @@
+</body>
+<script>
+    <% if (messages.message) { %>
+        window.alert('<%= messages.message %>');
+    <% } %>
+
+    function filterVehicles() {
+        const selectedCategory = document.getElementById('categorySelect').value;
+        const selectedStatus = document.getElementById('statusSelect').value;
+        const rows = document.querySelectorAll('#vehicleTable tbody tr');
+        rows.forEach(row => {
+            row.style.display = 'none';
+        });
+
+        // Show rows matching the selected category and status
+        rows.forEach(row => {
+            const categoryCell = row.querySelector('td:nth-child(3)'); // 3rd row td to find category
+            const statusCell = row.querySelector('td:nth-child(6)'); // 7th row td to find the status
+
+            const category = categoryCell.textContent.trim();
+            const status = statusCell.textContent.trim();
+
+            const categoryMatch = selectedCategory === 'All Categories' || category === selectedCategory;
+            const statusMatch = selectedStatus === 'All Status' || status === selectedStatus;
+
+            if (categoryMatch && statusMatch) {
+                row.style.display = ''; 
+            }
+        });
+    }
+</script>
+ <!-- Jquery JS-->
+ <script src="public/vendor/jquery-3.2.1.min.js"></script>
+ <!-- Bootstrap JS-->
+ <script src="public/vendor/bootstrap-4.1/popper.min.js"></script>
+ <script src="public/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+ <!-- Vendor JS       -->
+ <script src="public/vendor/slick/slick.min.js">
+ </script>
+ <script src="public/vendor/wow/wow.min.js"></script>
+ <script src="public/vendor/animsition/animsition.min.js"></script>
+ <script src="public/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+ </script>
+ <script src="public/vendor/counter-up/jquery.waypoints.min.js"></script>
+ <script src="public/vendor/counter-up/jquery.counterup.min.js">
+ </script>
+ <script src="public/vendor/circle-progress/circle-progress.min.js"></script>
+ <script src="public/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+ <script src="public/vendor/chartjs/Chart.bundle.min.js"></script>
+ <script src="public/vendor/select2/select2.min.js">
+ </script>
+
+ <!-- Main JS-->
+ <script src="public/js/main.js"></script>
+</html>
+<!-- end document-->

@@ -1,0 +1,45 @@
+<script>
+    <% if (messages.success) { %>
+        window.alert('Created Successfully');
+    <% } %>
+    function showTypes() {
+    const category = document.getElementById("category").value;
+    //options
+    const motorcycleTypes = document.getElementById("MotorcycleTypes");
+    const heavyTypes = document.getElementById("HeavyTypes");
+    const MilitaryTypes = document.getElementById("MilitaryTypes");
+    const WheelTypes = document.getElementById("WheelTypes");
+    // Hide all types initially
+    motorcycleTypes.style.display = "none";
+    heavyTypes.style.display = "none";
+    MilitaryTypes.style.display = "none";
+    WheelTypes.style.display = "none";
+
+    // Show types based on selected category
+    if (category === "Motorcycle Vehicles") {
+        motorcycleTypes.style.display = "flex";
+        document.getElementById("typeMotor").setAttribute("required", "true");
+    } else {
+        document.getElementById("typeMotor").removeAttribute("required");
+    }
+    if (category === "Heavy Equipment Vehicles") {
+        heavyTypes.style.display = "flex";
+        document.getElementById("typeHeavy").setAttribute("required", "true");
+    } else {
+        document.getElementById("typeHeavy").removeAttribute("required");
+    }
+    if (category === "Military Vehicles") {
+        MilitaryTypes.style.display = "flex";
+        document.getElementById("typeMilitary").setAttribute("required", "true");
+    } else {
+        document.getElementById("typeMilitary").removeAttribute("required");
+    }
+    if (category === "4-Wheel Vehicles") {
+        WheelTypes.style.display = "flex";
+        document.getElementById("typeWheel").setAttribute("required", "true");
+    } else {
+        document.getElementById("typeWheel").removeAttribute("required");
+    }
+    }
+</script>
+<!-- end modal scroll -->

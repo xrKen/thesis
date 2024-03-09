@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verification Code</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .verification-form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .verification-card {
+      max-width: 400px;
+      width: 100%;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container verification-form">
+  <div class="verification-card">
+    <h3 class="text-center mb-4">Verification Code</h3>
+    <form method="post" action="/verify">
+        <% if (sendcode === true) { %>
+            <div class="text-center" role="alert">
+              <p class="fw-lighter" style="font-size: .8rem;">Code send: <%= user.email %></p>
+            </div>
+            <% } %>
+            <% if (messages.error) { %>
+            <div class="alert alert-danger " role="alert">
+              <p><%= messages.error %></p>
+            </div>
+            <% } %>
+        <div class="text-left mb-3"><p>Time remaining: <span id="time"></span></p></div>
+      <div class="mb-3">
+        <input type="hidden" name="token" value="<%= userToken.token %>">
+        <input type="text" class="form-control" id="verificationCode" name="verificationCode" placeholder="Verification Code" pattern="^[A-Z0-9]{6}$">
+      </div>
+      <button type="submit" class="btn btn-primary w-100 mb-3" name="action" value="submit">Verify</button>
+      <button type="submit" class="btn btn-secondary w-100" name="action" value="resend">Resend Code</button>
+    </form>
+  </div>
+</div>
+
+<!-- Bootstrap Bundle with Popper -->
+<script>
+const adjustedExpirationTimestamp = <%= adjustedExpirationTimestamp %>;
+</script>
+<script>
+    
+//timer
+function startTimer(duration, display, onExpiration) {
+var timer = duration, minutes, seconds;
+var intervalId = setInterval(function () {
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10);
+
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    display.textContent = minutes + ":" + seconds;
+
+    if (--timer < 0) {
+        // Timer expired, stop the interval immediately
+        clearInterval(intervalId);
+        display.textContent = 'Expired';
+
+        // Call the provided callback function
+        if (typeof onExpiration === 'function') {
+            onExpiration();
+        }
+    }
+}, 1000);
+}
+
+window.onload = function () {
+
+
+var timerDuration = adjustedExpirationTimestamp ;
+
+// If the timer has already expired
+if (timerDuration <= 0) {
+    var display = document.querySelector('#time');
+    display.textContent = 'Expired';
+} else {
+    if(timerDuration > 0){
+        var display = document.querySelector('#time');
+        startTimer(timerDuration, display);
+    }
+    // Start the timer and provide a callback for expiration
+    var display = document.querySelector('#time');
+    startTimer(timerDuration, display, function () {
+        // Your logic here when the timer expires
+        console.log('Timer expired!');
+        // Example: Display a message or take some action
+    });
+}
+};
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

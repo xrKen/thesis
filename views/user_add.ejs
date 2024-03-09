@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title><%= title %> | <%= site_title %></title>
+
+    <!-- Fontfaces CSS-->
+    <link href="/public/css/font-face.css" rel="stylesheet" media="all">
+    <link href="/public/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/public/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/public/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="/public/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="/public/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="/public/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="/public/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="/public/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="/public/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="/public/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="/public/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="/public/css/theme.css" rel="stylesheet" media="all">
+
+</head>
+
+    <body class="">
+        <div class="page-wrapper">
+            <%- include('partials/nav_bar/nav.ejs');  %>
+                <%- include('partials/nav_bar/nav_mobile.ejs');  %>
+                <%- include('./partials/nav_bar/nav_mobile_bottom.ejs'); %>
+                    <!-- END HEADER MOBILE -->
+
+                    <!-- PAGE CONTENT-->
+                    <div class="page-content--bgf7">
+                        <!-- BREADCRUMB-->
+                        <section class="au-breadcrumb2">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="au-breadcrumb-content">
+                                            <div class="au-breadcrumb-left">
+                                                <span class="au-breadcrumb-span">You are here:</span>
+                                                <ul class="list-unstyled list-inline au-breadcrumb__list">
+                                                    <li class="list-inline-item active">
+                                                        <a href="#">Home</a>
+                                                    </li>
+                                                    <li class="list-inline-item seprate">
+                                                        <span>/</span>
+                                                    </li>
+                                                    <li class="list-inline-item">Dashboard</li>
+                                                </ul>
+                                            </div>
+                                            <form class="au-form-icon--sm" action="" method="post">
+                                                <input class="au-input--w300 au-input--style2" type="text"
+                                                    placeholder="Search for datas &amp; reports...">
+                                                <button class="au-btn--submit2" type="submit">
+                                                    <i class="zmdi zmdi-search"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- END BREADCRUMB-->
+
+                        <%- include('./partials/welcome/welcome.ejs'); %>
+                        
+                        <div class="container-fluid ">
+                            <div class="row justify-content-center align-items-center">
+                                <div class="col-lg-6 p-t-40">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Create User</strong>
+                                        </div>
+                                        <form action="" method="post">
+                                            <div class="card-body card-block">
+                                                <div class="form-group">
+                                                    <label for="assign" class=" form-control-label">Assign Barangay</label>
+                                                    <input type="text" id="assign" name="assign" placeholder="Brgy. Name" class="form-control" required/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="email" class=" form-control-label">Email</label>
+                                                    <input type="email" id="email" name="email" placeholder="Enter your Email" class="form-control" required/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="address" class=" form-control-label">Address</label>
+                                                    <input type="text" id="address" name="address" placeholder="Enter Address" class="form-control" required/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="role" class=" form-control-label">User Role</label>
+                                                    <select name="role" id="role" class="form-control" required>
+                                                        <option value="" disabled selected hidden> Select Roles</option>
+                                                        <option value="member">member</option>
+                                                        <option value="creator">creator</option>
+                                                        <option value="admin">admin</option>
+                                                    </select>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col-8">
+                                                        <div class="form-group">
+                                                            <label for="contact" class=" form-control-label">Contact</label>
+                                                            <input type="text" id="contact" name="contact" placeholder="Enter your Contact Number" class="form-control" required/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <div class="form-group">
+                                                            <label for="fullname" class=" form-control-label">Assign Name</label>
+                                                            <input type="text" id="fullname" name="fullname" placeholder="Enter your Full name" class="form-control" required/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="password" class=" form-control-label">Password</label>
+                                                    <input type="password" id="password" name="password" placeholder="Enter Password" class="form-control" required/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="confirmPassword" class=" form-control-label">Confirm Password</label>
+                                                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" class="form-control" required/>
+                                                </div>
+                                                <div class="form-actions form-group text-right">
+                                                    <button type="submit" class="btn btn-success btn-sm">Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <%- include('./partials/copyright/copyright.ejs'); %>
+                    </div>
+        </div>
+
+    </body>
+    <script>
+        <% if (messages.message) { %>
+            window.alert('<%= messages.message %>');
+        <% } %>
+    </script>
+     <!-- Jquery JS-->
+     <script src="/public/vendor/jquery-3.2.1.min.js"></script>
+     <!-- Bootstrap JS-->
+     <script src="public/vendor/bootstrap-4.1/popper.min.js"></script>
+     <script src="/public/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+     <!-- Vendor JS       -->
+     <script src="/public/vendor/slick/slick.min.js">
+     </script>
+     <script src="/public/vendor/wow/wow.min.js"></script>
+     <script src="/public/vendor/animsition/animsition.min.js"></script>
+     <script src="/public/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+     </script>
+     <script src="/public/vendor/counter-up/jquery.waypoints.min.js"></script>
+     <script src="/public/vendor/counter-up/jquery.counterup.min.js">
+     </script>
+     <script src="/public/vendor/circle-progress/circle-progress.min.js"></script>
+     <script src="/public/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+     <script src="/public/vendor/chartjs/Chart.bundle.min.js"></script>
+     <script src="/public/vendor/select2/select2.min.js">
+     </script>
+    
+     <!-- Main JS-->
+     <script src="/public/js/main.js"></script>
+    </html>
+    <!-- end document-->

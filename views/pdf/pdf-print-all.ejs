@@ -1,0 +1,87 @@
+
+<style>
+    /* Reset default table styles */
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        
+    }
+
+    /* Style table headers */
+    th {
+        background-color: #f2f2f2;
+        border: 1px solid #dddddd;
+        padding: 6px;
+        text-align: left;
+    }
+
+    /* Style table cells */
+    td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+        font-size: 16px;
+    }
+
+
+    /* Hover effect on rows */
+    tr:hover {
+        background-color: #e2e2e2;
+    }
+    h3{
+        
+        text-align: center;
+    }
+</style>
+    <h3>All in <%= year %></h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Assign Personel</th>
+                <th>Date Issued</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Type</th>
+                <th>OR/CR/MIR</th>
+                <th>Plate Number</th>
+                <th>Model</th>
+                <th>Condition</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if(vehicles && vehicles.length > 0) { %>
+                <% vehicles.forEach(vehicle=> { %>
+            <tr>
+                <td>
+                    <%= vehicle.assignPersonel %>
+                </td>
+                <td>
+                    <%= vehicle.dateIssued %>
+                </td>
+                <td>
+                    <%= vehicle.brand %>
+                </td>
+                <td>
+                    <%= vehicle.category %>
+                </td>
+                <td>
+                    <%= vehicle.type %>
+                </td>
+                <td>
+                    <%= vehicle.OrCr %>
+                </td>
+                <td>
+                    <%= vehicle.plateNumber %>
+                </td>
+                <td>
+                    <%= vehicle.model %>
+                </td>
+                <td>
+                    <%= vehicle.condition %>
+                </td>
+                <% }); %>
+            </tr>
+            <% } else { %>
+                <p>No vehicles Found.</p>
+                <% } %>
+        </tbody>
+    </table>

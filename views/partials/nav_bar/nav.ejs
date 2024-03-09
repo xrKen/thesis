@@ -1,0 +1,197 @@
+<!-- HEADER DESKTOP-->
+<%
+function activeClass(link) {
+    return currentUrl === link ? 'active' : '';
+}
+%>
+<header class="header-desktop3 d-none d-lg-block">
+    <div class="section__content section__content--p35">
+        <div class="header3-wrap">
+            <div class="header__logo">
+                <a href="#">
+                    <img src="/public/img/logo.jpg" alt="somethingG" style="width: 55px; height: 55px; border-radius: 50%;"/>
+                </a>
+            </div>
+            <div class="header__navbar">
+                <ul class="list-unstyled">
+                    <% if(user.role === 'member') {%>
+                    <li class=" <%= activeClass('/') %>">
+                        <a href="/">
+                            <i class="fa fa-home"></i>
+                            <span class="bot-line"></span>Home</a>
+                    </li>
+                    <li class=" <%= activeClass('/requests') %>">
+                        <a href="/requests">
+                            <i class="fas fa-copy"></i>
+                            <span class="bot-line"></span>Requests</a>
+                    </li>
+                    <% } %>
+                    <% if(user.role === 'creator') {%>
+                        <li class=" <%= activeClass('/vehicles') %>">
+                            <a href="/vehicles">
+                                <i class="fa fa-home"></i>
+                                <span class="bot-line"></span>Home</a>
+                        </li>
+                        <li class=" <%= activeClass('/inventory') %>">
+                            <a href="/inventory">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span class="bot-line"></span>Dashboard</a>
+                        </li>
+                    <% } %>
+                    <% if(user.role === 'admin') {%>
+                        <li class=" <%= activeClass('/admin') %>">
+                            <a href="/admin">
+                                <i class="fa fa-home"></i>
+                                <span class="bot-line"></span>Home</a>
+                        </li>
+                        <li class=" <%= activeClass('/dashboard') %>">
+                            <a href="/dashboard">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span class="bot-line"></span>Dashboard</a>
+                        </li>
+                    <% } %>
+                    <!-- <li>
+                        <a href="">
+                            <i class="fas fa-trophy"></i>
+                            <span class="bot-line"></span>Features</a>
+                    </li> -->
+                    <!-- <li class="has-sub">
+                        <a href="#">
+                            <i class="fas fa-copy"></i>
+                            <span class="bot-line"></span>Pages</a>
+                        <ul class="header3-sub-list list-unstyled">
+                            <li>
+                                <a href="/login">Login</a>
+                            </li>
+                        </ul>
+                    </li> -->
+                </ul>
+            </div>
+            <div class="header__tool">
+                <!-- <div class="header-button-item has-noti js-item-menu">
+                    <i class="zmdi zmdi-notifications"></i>
+                    <div class="notifi-dropdown notifi-dropdown--no-bor js-dropdown">
+                        <div class="notifi__title">
+                            <p>You have 3 Notifications</p>
+                        </div>
+                        <div class="notifi__item">
+                            <div class="bg-c1 img-cir img-40">
+                                <i class="zmdi zmdi-email-open"></i>
+                            </div>
+                            <div class="content">
+                                <p>You got a email notification</p>
+                                <span class="date">April 12, 2018 06:50</span>
+                            </div>
+                        </div>
+                        <div class="notifi__item">
+                            <div class="bg-c2 img-cir img-40">
+                                <i class="zmdi zmdi-account-box"></i>
+                            </div>
+                            <div class="content">
+                                <p>Your account has been blocked</p>
+                                <span class="date">April 12, 2018 06:50</span>
+                            </div>
+                        </div>
+                        <div class="notifi__item">
+                            <div class="bg-c3 img-cir img-40">
+                                <i class="zmdi zmdi-file-text"></i>
+                            </div>
+                            <div class="content">
+                                <p>You got a new file</p>
+                                <span class="date">April 12, 2018 06:50</span>
+                            </div>
+                        </div>
+                        <div class="notifi__footer">
+                            <a href="#">All notifications</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-button-item js-item-menu">
+                    <i class="zmdi zmdi-settings"></i>
+                    <div class="setting-dropdown js-dropdown">
+                        <div class="account-dropdown__body">
+                            <div class="account-dropdown__item">
+                                <a href="/profile">
+                                    <i class="zmdi zmdi-account"></i>Account</a>
+                            </div>
+                            <div class="account-dropdown__item">
+                                <a href="">
+                                    <i class="zmdi zmdi-settings"></i>Setting</a>
+                            </div>
+                        </div>
+                        <div class="account-dropdown__body">
+                            <div class="account-dropdown__item">
+                                <a href="">
+                                    <i class="zmdi zmdi-globe"></i>Language</a>
+                            </div>
+                            <div class="account-dropdown__item">
+                                <a href="">
+                                    <i class="zmdi zmdi-pin"></i>Location</a>
+                            </div>
+                            <div class="account-dropdown__item">
+                                <a href="">
+                                    <i class="zmdi zmdi-email"></i>Email</a>
+                            </div>
+                            <div class="account-dropdown__item">
+                                <a href="">
+                                    <i class="zmdi zmdi-notifications"></i>Notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="account-wrap">
+                    <div class="account-item account-item--style2 clearfix js-item-menu">
+                        <div class="image">
+                            <% if (!user.imageURL) { %>
+                                <img src="/public/img/profile/empty-profile.png" alt="<%= user.fullname %>" />
+                            <% } else { %>
+                                <img src="<%= user.imageURL %>" alt="<%= user.fullname %>" />
+                            <% } %>
+                        </div>
+                        <div class="content">
+                            <a class="js-acc-btn" href="#"><%= user.fullname %></a>
+                        </div>
+                        <div class="account-dropdown js-dropdown">
+                            <div class="info clearfix">
+                                <div class="image">
+                                    <% if (!user.imageURL) { %>
+                                    <a href="/profile">
+                                        <img src="/public/img/profile/empty-profile.png" alt="<%= user.fullname %>" />
+                                    </a>
+                                    <% } else { %>
+                                        <a href="/profile">
+                                            <img src="<%= user.imageURL %>" alt="<%= user.fullname %>" />
+                                        </a>
+                                    <% } %>
+                                </div>
+                                <div class="content">
+                                    <h5 class="name">
+                                        <a href="/profile"><%= user.fullname %></a>
+                                    </h5>
+                                    <span class="email"><%= user.email %></span>
+                                </div>
+                            </div>
+                            <div class="account-dropdown__body">
+                                <div class="account-dropdown__item">
+                                    <a href="/profile">
+                                        <i class="zmdi zmdi-account"></i>Account</a>
+                                </div>
+                                <!-- <div class="account-dropdown__item">
+                                    <a href="">
+                                        <i class="zmdi zmdi-settings"></i>Setting</a>
+                                </div> -->
+                            </div>
+                            <div class="account-dropdown__footer">
+                                <form action="/logout" method="post">
+                                    <button type="submit">
+                                    <i class="zmdi zmdi-power"></i>Logout</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- END HEADER DESKTOP-->

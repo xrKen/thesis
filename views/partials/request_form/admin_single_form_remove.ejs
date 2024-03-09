@@ -1,0 +1,33 @@
+<tr class="tr-shadow">
+    <!-- modal scroll -->
+<div class="modal fade" id="<%= reqForm._id %>" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width: 80%;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scrollmodalLabel">Requestor: <%= reqForm.requestorName %></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" >
+                <iframe src="public/upload/pdf/<%= reqForm.userId %>/<%= reqForm.requestorName %>/<%= reqForm._id %>.pdf" width="100%" height="800px" ></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal scroll -->
+    <td><%= user.assign %></td>
+    <td><%= user.fullname %></td>
+    <td>
+        <span class="block-email"><%= user.email %></span>
+    </td>
+    <td><%= reqForm.dateApproved %></td>
+    <td><button type="button" data-toggle="modal" data-target="#<%= reqForm._id %>" style="color: dodgerblue;">View PDF</button></td>
+    <td>
+        <span class="status--<%= reqForm.status %>"><%= reqForm.status %></span>
+    </td>
+    
+    <td><%= reqForm.requestorName %></td>
+    
+</tr>
+<tr class="spacer"></tr>

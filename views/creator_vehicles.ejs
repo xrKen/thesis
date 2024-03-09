@@ -1,0 +1,454 @@
+    <%- include('partials/header/header.ejs'); %>
+
+<body class="">
+    <div class="page-wrapper">
+        <%- include('partials/nav_bar/nav.ejs'); %>
+            <%- include('partials/nav_bar/nav_mobile.ejs'); %>
+                <%- include('./partials/nav_bar/nav_mobile_bottom.ejs'); %>
+                <!-- END HEADER MOBILE -->
+
+                <!-- PAGE CONTENT-->
+                <div class="page-content--bgf7">
+                    <!-- BREADCRUMB-->
+                    <section class="au-breadcrumb2">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="au-breadcrumb-content">
+                                        <div class="au-breadcrumb-left">
+                                            <span class="au-breadcrumb-span">You are here:</span>
+                                            <ul class="list-unstyled list-inline au-breadcrumb__list">
+                                                <li class="list-inline-item active">
+                                                    <a href="">Home</a>
+                                                </li>
+                                                <li class="list-inline-item seprate">
+                                                    <span>/</span>
+                                                </li>
+                                                <li class="list-inline-item">Dashboard</li>
+                                            </ul>
+                                        </div>
+                                        <form class="au-form-icon--sm" action="" method="post">
+                                            <input class="au-input--w300 au-input--style2" type="text"
+                                                placeholder="Search for datas &amp; reports...">
+                                            <button class="au-btn--submit2" type="submit">
+                                                <i class="zmdi zmdi-search"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- END BREADCRUMB-->
+
+                    <!-- WELCOME-->
+                    <%- include('./partials/welcome/welcome.ejs'); %>
+                    <!-- END WELCOME-->
+
+                    <!-- box -->
+                    <section class="statistic statistic2">
+                        <div class="container">
+                            <div class="row m-t-25 ">
+                                <div class="col-sm-6 col-lg-3 text-center">
+                                    <div class="overview-item overview-item--c1">
+                                        <div class="overview__inner">
+                                            <div class="overview-box clearfix">
+                                                <div class="icon">
+                                                    <i class="zmdi zmdi-account-o"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <% if(reqForm && reqForm.length > 0) { %>
+                                                        <h2><%= reqForm.length %></h2>
+                                                    <% }else { %>
+                                                        <h2>0</h2>
+                                                    <% } %>
+                                                    <span>Request</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg-3 text-center ">
+                                    <div class="overview-item overview-item--c2">
+                                        <div class="overview__inner">
+                                            <div class="overview-box clearfix">
+                                                <div class="icon">
+                                                    <i class="zmdi zmdi-shopping-cart"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <%
+                                                    const approvedForms = reqForms.filter(form => form.status === 'settled');
+                                                    const approvedFormsCount = approvedForms.length;
+                                                    %>
+                                                    <% if(reqForms && reqForms.length > 0) { %>
+                                                        <h2><%= approvedFormsCount %></h2>
+                                                    <% } else { %>
+                                                        <h2>0</h2>
+                                                    <% } %>
+                                                    <span>Done Contract</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg-3 text-center">
+                                    <div class="overview-item overview-item--c3">
+                                        <div class="overview__inner">
+                                            <div class="overview-box clearfix">
+                                                <div class="icon">
+                                                    <i class="zmdi zmdi-calendar-note"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <h2><%= submissionCount %>/10</h2>
+                                                    <span>This day</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg-3 text-center">
+                                    <div class="overview-item overview-item--c4">
+                                        <div class="overview__inner">
+                                            <div class="overview-box clearfix">
+                                                <div class="icon">
+                                                    <i class="zmdi zmdi-account-calendar"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <% if(reqForms && reqForms.length > 0) { %>
+                                                        <h2><%= reqForms.length %></h2>
+                                                    <% }else { %>
+                                                        <h2>0</h2>
+                                                    <% } %>
+                                                    <span>Total Request</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- box -->
+
+                        
+                        <!-- Available List START-->
+                        <section class="p-t-20">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="title-5 m-b-35">LGU Motor Pool Serviceable</h3>
+                                        <div class="table-responsive table-responsive-data2">
+                                            <table class="table table-data2" style="white-space: nowrap;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Categories</th>
+                                                        <th>Types</th>
+                                                        <th>Status</th>
+                                                        <th>Quantity</th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% const allCategory = ['Motorcycle Vehicles', 'Heavy Equipment Vehicles', 'Military Vehicles', '4-Wheel Vehicles']; %>
+                                                    <% const groupedVehiclesAvailable = {}; %>
+                                                    <% let totalQuantityAvailable = 0; %>
+                                                    <% vehicles.forEach(vehicle => {
+                                                        if (vehicle.status === 'available') { // Check if the vehicle status is 'available'
+                                                            const key = `${vehicle.type}-${vehicle.category}`; // Unique key combining type and category
+                                                            if (!groupedVehiclesAvailable[key]) {
+                                                                groupedVehiclesAvailable[key] = {
+                                                                    type: vehicle.type,
+                                                                    category: vehicle.category,
+                                                                    qty: vehicle.qty,
+                                                                    status: vehicle.status
+                                                                };
+                                                            } else {
+                                                                groupedVehiclesAvailable[key].qty += vehicle.qty;
+                                                            }
+                                                            totalQuantityAvailable += vehicle.qty;
+                                                        }
+                                                    }); %>
+
+                                                    <% Object.values(groupedVehiclesAvailable).forEach(vehicle => { %>
+                                                        <tr>
+                                                            <td><%= vehicle.category %></td>
+                                                            <td class="desc"><%= vehicle.type %></td>
+                                                            <td><span class="status--<%= vehicle.status %>"><%= vehicle.status %></span></td>
+                                                            <td ><%= vehicle.qty %></td>
+                                                        </tr>
+                                                    <% }); %>
+                                                    <tr class="spacer"></tr>
+                                                    <tr>
+                                                        <td colspan="3" class="text-left"><strong>Total</strong></td>
+                                                        <td colspan="1"><%= totalQuantityAvailable %></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- Available List END-->
+                        <!-- Process List START-->
+                        <section class="p-t-80">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="title-5 m-b-35">LGU Motor Pool Process</h3>
+                                        <div class="table-responsive table-responsive-data2">
+                                            <table class="table table-data2" style="white-space: nowrap;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Categories</th>
+                                                        <th>Types</th>
+                                                        <th>Status</th>
+                                                        <th>Quantity</th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% const groupedVehiclesProcess = {}; %>
+                                                    <% let totalQuantityProcess = 0; %>
+                                                    <% vehicles.forEach(vehicle => {
+                                                        if (vehicle.status === 'process') { // Check if the vehicle status is 'available'
+                                                            const key = `${vehicle.type}-${vehicle.category}`; // Unique key combining type and category
+                                                            if (!groupedVehiclesProcess[key]) {
+                                                                groupedVehiclesProcess[key] = {
+                                                                    type: vehicle.type,
+                                                                    category: vehicle.category,
+                                                                    qty: vehicle.qty === 0 ? 1 : vehicle.qty ,
+                                                                    status: vehicle.status
+                                                                };
+                                                            } else {
+                                                                groupedVehiclesProcess[key].qty += vehicle.qty;
+                                                            }
+                                                            totalQuantityProcess += vehicle.qty === 0 ? 1 : vehicle.qty;
+                                                        }
+                                                    }); %>
+
+                                                    <% Object.values(groupedVehiclesProcess).forEach(vehicle => { %>
+                                                        <tr>
+                                                            <td><%= vehicle.category %></td>
+                                                            <td class="desc"><%= vehicle.type %></td>
+                                                            <td><span class="status--<%= vehicle.status %>"><%= vehicle.status %></span></td>
+                                                            <td ><%= vehicle.qty %></td>
+                                                        </tr>
+                                                    <% }); %>
+                                                    <tr>
+                                                        <tr class="spacer"></tr>
+                                                        <td colspan="3" class="text-left"><strong>Total</strong></td>
+                                                        <td colspan="1"><%= totalQuantityProcess %></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- Process List END-->
+                        <!--Not Available List START-->
+                        <section class="p-t-80">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="title-5 m-b-35">LGU Motor Pool Non Serviceable</h3>
+                                        <div class="table-responsive table-responsive-data2">
+                                            <table class="table table-data2" style="white-space: nowrap;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Categories</th>
+                                                        <th>Types</th>
+                                                        <th>Status</th>
+                                                        <th>Quantity</th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% const groupedVehiclesNotAvailable = {}; %>
+                                                    <% let totalQuantityNotAvailable = 0; %>
+                                                    <% vehicles.forEach(vehicle => {
+                                                        if (vehicle.status === 'not available') {
+                                                            const key = `${vehicle.type}-${vehicle.category}`; // Unique key combining type and category
+                                                            if (!groupedVehiclesNotAvailable[key]) {
+                                                                groupedVehiclesNotAvailable[key] = {
+                                                                    type: vehicle.type,
+                                                                    category: vehicle.category,
+                                                                    qty: vehicle.qty,
+                                                                    status: vehicle.status
+                                                                };
+                                                            } else {
+                                                                groupedVehiclesNotAvailable[key].qty += vehicle.qty;
+                                                            }
+                                                            totalQuantityNotAvailable += vehicle.qty;
+                                                        }
+                                                    }); %>
+
+                                                    <% Object.values(groupedVehiclesNotAvailable).forEach(vehicle => { %>
+                                                        <tr>
+                                                            <td><%= vehicle.category %></td>
+                                                            <td class="desc"><%= vehicle.type %></td>
+                                                            <td><span class="status--<%= vehicle.status %>"><%= vehicle.status %></span></td>
+                                                            <td ><%= vehicle.qty %></td>
+                                                        </tr>
+                                                    <% }); %>
+                                                    <tr class="spacer"></tr>
+                                                    <tr>
+                                                        <td colspan="3" class="text-left"><strong>Total</strong></td>
+                                                        <td colspan="1"><%= totalQuantityNotAvailable %></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!--Not Available List END-->
+                        <!-- Deployed List START-->
+                        <section class="p-t-80">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="title-5 m-b-35">LGU Motor Pool Released</h3>
+                                        <div class="table-responsive table-responsive-data2">
+                                            <table class="table table-data2" style="white-space: nowrap;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Categories</th>
+                                                        <th>Date Released</th>
+                                                        <th>Types</th>
+                                                        <th>Status</th>
+                                                        <th>Quantity</th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% const groupedVehiclesDeployed = {}; %>
+                                                    <% let totalQuantityDeployed = 0; %>
+                                                    <% vehicles.forEach(vehicle => {
+                                                        if (vehicle.status === 'released') { // Check if the vehicle status is 'available'
+                                                            const key = `${vehicle.type}-${vehicle.category}`; // Unique key combining type and category
+                                                            if (!groupedVehiclesDeployed[key]) {
+                                                                groupedVehiclesDeployed[key] = {
+                                                                    type: vehicle.type,
+                                                                    category: vehicle.category,
+                                                                    dateDeployed: vehicle.dateDeployed,
+                                                                    qty: vehicle.qty === 0 ? 1 : vehicle.qty,
+                                                                    status: vehicle.status
+                                                                };
+                                                            } else {
+                                                                groupedVehiclesDeployed[key].qty += vehicle.qty;
+                                                            }
+                                                            totalQuantityDeployed += vehicle.qty === 0 ? 1 : vehicle.qty;
+                                                        }
+                                                    }); %>
+
+                                                    <% Object.values(groupedVehiclesDeployed).forEach(vehicle => { %>
+                                                        <tr>
+                                                            <td><%= vehicle.category %></td>
+                                                            <td><%= vehicle.dateDeployed %></td>
+                                                            <td class="desc"><%= vehicle.type %></td>
+                                                            <td><span class="status--<%= vehicle.status %>"><%= vehicle.status %></span></td>
+                                                            <td ><%= vehicle.qty %></td>
+                                                        </tr>
+                                                    <% }); %>
+                                                    <tr>
+                                                        <tr class="spacer"></tr>
+                                                        <td colspan="4" class="text-left"><strong>Total</strong></td>
+                                                        <td colspan="1"><%= totalQuantityDeployed %></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- Deployed List END-->
+                        <!-- start all Vechicles List-->
+                        <section class="p-t-70">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="title-5 m-b-35">LGU Motor Pool vehicles</h3>
+                                        <form action="print" method="post">
+                                            <div class="table-data__tool">
+                                                <div class="table-data__tool-left">
+                                                    <div class="rs-select2--light rs-select2--md">
+                                                        <select id="month" class="js-select2" name="month">
+                                                            <option value="" hidden>Select Month</option>
+                                                            <option value="All">All</option>
+                                                            <option value="01">January</option>
+                                                            <option value="02">February</option>
+                                                            <option value="03">March</option>
+                                                            <option value="04">April</option>
+                                                            <option value="05">May</option>
+                                                            <option value="06">June</option>
+                                                            <option value="07">July</option>
+                                                            <option value="08">August</option>
+                                                            <option value="09">September</option>
+                                                            <option value="10">October</option>
+                                                            <option value="11">November</option>
+                                                            <option value="12">Decembeer</option>
+                                                        </select>
+                                                        <div class="dropDownSelect2"></div>
+                                                    </div>
+                                                    <div class="rs-select2--light rs-select2--md">
+                                                        <select id="year" class="js-select2" name="year" required>
+                                                            <option value="" hidden>Select Year</option>
+                                                            <option value="2024">2024</option>
+                                                            <option value="2025">2025</option>
+                                                            <option value="2026">2026</option>
+                                                            <option value="2027">2027</option>
+                                                            <option value="2028">2028</option>
+                                                            <option value="2029">2029</option>
+                                                        </select>
+                                                        <div class="dropDownSelect2"></div>
+                                                    </div>
+                                                    <button class="au-btn-filter">  <i class="zmdi zmdi-print"></i>PRINT</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <% if(vehicles && vehicles.length > 0) { %>
+                                            <div class="table-responsive table-responsive-data2">
+                                                <table id="vehicleTable" class="table table-data2 text-center" style="white-space: nowrap;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Assign Personel</th>
+                                                            <th>Date Issued</th>
+                                                            <th>brand</th>
+                                                            <th>category</th>
+                                                            <th>type</th>
+                                                            <th>OR/CR/MIR</th>
+                                                            <th>plateNumber</th>
+                                                            <th>model</th>
+                                                            <th>Condition</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <% vehicles.forEach(vehicle=> { %>
+                                                            <%- include('./partials/vehicle/creator_all_vehicle.ejs', {vehicle: vehicle}); %>
+                                                        <% }); %>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <% } else { %>
+                            <p class="text-center">No LGU Motor Pool vehicles Available.</p>
+                        <% } %>
+                        <!-- END All Vehicles data-->
+                                    
+                            <%- include('./partials/modal/modal_vehicle.ejs'); %>
+
+                                <%- include('./partials/copyright/copyright.ejs'); %>
+                </div>
+    </div>
+    <%- include('partials/footer/footer.ejs'); %>

@@ -1,0 +1,98 @@
+                        <!-- request modal -->
+                        <div class="modal fade" id="addRequest" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="scrollmodalLabel">Request Form</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body m-5" >
+                                        <form action="submit" method="post">
+                                            <div class="text-justify">
+                                                <p style="font-weight: bold;">Date:</p>
+                                                <br/>
+                                                <p style="font-weight: bold;">Address:<input type="text" name="address" id="address" placeholder="(Your Address)" class="border-bottom px-2 text-center " style="font-weight: 400; background-color: none;" required/></p>
+                                                <br/> <br/>
+                                                <p>Name of <span style="font-weight: bold;">Mayor/Elected</span> officer in your place Address of the Municipal</p> 
+                                                <br/> <br/>
+                                                To whom it may concer, Good day, I am so gald for being a part of this place here in our city 
+                                                 <input type="text" name="city" id="city" placeholder="(Name of your City)" class="border-bottom px-2 text-center " style="font-weight: 400; letter-spacing:  2px; background-color: none;" required/>  , 
+                                                because of outstanding performance in terms of communicating in the ordinary people and giving as an access to barrow some equipmens. 
+                                                For Know I respectfully need equipment that we will be use in a important 
+                                                 <input type="text" name="event" id="event" placeholder="(Name of Event)" class="border-bottom px-2 text-center " style="font-weight: 400; letter-spacing: 2px; background-color: none;" required/>. Thanks for considering me.
+                                                <br/> <br/> 
+                                                Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum
+                                                faucibus dolor auctor.
+                                                <br> <br/>
+                                                Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+                                                Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+                                                <br/> <br/>
+                                                
+                                                <% if (vehicles && vehicles.length > 0) { %>
+                                                    <p style="font-weight: bold;">Categories:</p>
+                                                    <% 
+                                                    const categories = Array.from(new Set(vehicles.map(vehicle => vehicle.category)));
+                                                    categories.forEach(category => {
+                                                        // Filter vehicles by category
+                                                        const vehiclesInCategory = vehicles.filter(vehicle => vehicle.category === category && vehicle.qty > 0 && vehicle.status === 'available');
+                                                        // Group vehicles by type and calculate total quantity for each type
+                                                        const groupedVehicles = vehiclesInCategory.reduce((acc, vehicle) => {
+                                                            if (!acc[vehicle.type]) {
+                                                                acc[vehicle.type] = 0;
+                                                            }
+                                                            acc[vehicle.type] += vehicle.qty;
+                                                            return acc;
+                                                        }, {});
+                                                
+                                                        // Display category if there are any vehicles in it
+                                                        if (vehiclesInCategory.length > 0) {
+                                                    %>
+                                                        <p style="font-weight: bold;"><%= category %>:</p>
+                                                        <% 
+                                                        // Loop through grouped vehicles to display each type and its total quantity
+                                                        Object.entries(groupedVehicles).forEach(([type, totalQty]) => {
+                                                        %>
+                                                            <label style="margin: 0.5rem">
+                                                                <input type="checkbox" name="selectedVehicle" value="<%= String(type) %>">
+                                                                <%= type %> (Total Quantity: <%= totalQty %>)
+                                                                <select name="qty[<%= type %>]" id="qty">
+                                                                    <% 
+                                                                    // Loop through quantity options based on total quantity
+                                                                    for (let i = 1; i <= totalQty; i++) {
+                                                                    %>
+                                                                        <option value="<%= i %>"><%= i %></option>
+                                                                    <% } %>
+                                                                </select>
+                                                            </label>
+                                                        <% 
+                                                        });
+                                                        %>
+                                                    <% 
+                                                        }
+                                                    });
+                                                    %>
+                                                <% } else{ %>
+                                                    <br/>
+                                                        <h3>No Vehicles Available</h3>
+                                                    <% } %>
+                                                
+                                                
+                                                <br/> <br/> <br/>
+                                                Sincerely Yours, <br/>
+                                                <input type="text" name="requestorName" id="requestorName" placeholder="(Requestor Name)" class="border-bottom text-left" style="font-weight: 300; background-color: none; width: 18rem;" required/> 
+                                                <br/> <br/>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                <% if (vehicles && vehicles.some(vehicle => vehicle.status === 'available')) { %>
+                                                    <button type="submit" class="btn btn-primary">Confirm</button>
+                                                <% } %>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end request modal -->

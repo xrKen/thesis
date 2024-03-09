@@ -1,0 +1,55 @@
+<tr>
+    <td>
+        <div class="table-data__info">
+            <h6>
+                <%= user.fullname %>
+            </h6>
+            <span>
+                <a href="">
+                    <%= user.email %>
+                </a>
+            </span>
+        </div>
+    </td>
+    <td>
+        <div class="table-data__info">
+            <h6>
+                <%= user.assign %>
+            </h6>
+        </div>
+    </td>
+    <td>
+        <div class="table-data__info">
+            <h6>
+                <%= user.contact %>
+            </h6>
+        </div>
+    </td>
+    <td>
+        <span class="role <%= user.role %>">
+            <%= user.role %>
+        </span>
+    </td>
+    <td>
+        <div class="table-data__info">
+            <h6>
+                <%= user.address %>
+            </h6>
+        </div>
+    </td>
+    <td class="text-center">
+                <form action="dashboard/user/delete" method="post">
+                    <input type="hidden" name="userId" value="<%= user._id %>">
+                <div class="table-data-feature text-center justify-content-center">
+                    <a href="user/<%= user._id %>" class="item" data-toggle="tooltip"
+                        data-placement="top" title="Edit">
+                        <i class="zmdi zmdi-edit"></i>
+                    </a>
+                    <button class="item" data-toggle="tooltip"
+                        data-placement="top" title="Delete">
+                        <i class="zmdi zmdi-delete"></i>
+                    </button>
+                </div>
+            </form>
+    </td>
+</tr>

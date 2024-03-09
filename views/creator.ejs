@@ -1,0 +1,754 @@
+<% if (user && user.role==='creator' ) { %>
+    <%- include('partials/header/header.ejs'); %>
+
+<body class="">
+    <div class="page-wrapper">
+        <%- include('partials/nav_bar/nav.ejs'); %>
+            <%- include('partials/nav_bar/nav_mobile.ejs'); %>
+                <%- include('./partials/nav_bar/nav_mobile_bottom.ejs'); %>
+                <!-- END HEADER MOBILE -->
+
+                <!-- PAGE CONTENT-->
+                <div class="page-content--bgf7">
+                    <!-- BREADCRUMB-->
+                    <section class="au-breadcrumb2">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="au-breadcrumb-content">
+                                        <div class="au-breadcrumb-left">
+                                            <span class="au-breadcrumb-span">You are here:</span>
+                                            <ul class="list-unstyled list-inline au-breadcrumb__list">
+                                                <li class="list-inline-item active">
+                                                    <a href="">Home</a>
+                                                </li>
+                                                <li class="list-inline-item seprate">
+                                                    <span>/</span>
+                                                </li>
+                                                <li class="list-inline-item">Dashboard</li>
+                                            </ul>
+                                        </div>
+                                        <form class="au-form-icon--sm" action="" method="post">
+                                            <input class="au-input--w300 au-input--style2" type="text"
+                                                placeholder="Search for datas &amp; reports...">
+                                            <button class="au-btn--submit2" type="submit">
+                                                <i class="zmdi zmdi-search"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- END BREADCRUMB-->
+
+                    <!-- WELCOME-->
+                    <%- include('./partials/welcome/welcome.ejs'); %>
+                    <!-- END WELCOME-->
+
+                    <!-- box -->
+                    <section class="statistic statistic2">
+                        <div class="container">
+                            <div class="row m-t-25 ">
+                                <div class="col-sm-6 col-lg-3 text-center">
+                                    <div class="overview-item overview-item--c1">
+                                        <div class="overview__inner">
+                                            <div class="overview-box clearfix">
+                                                <div class="icon">
+                                                    <i class="zmdi zmdi-account-o"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <% if(reqForm && reqForm.length > 0) { %>
+                                                        <h2><%= reqForm.length %></h2>
+                                                    <% }else { %>
+                                                        <h2>0</h2>
+                                                    <% } %>
+                                                    <span>Request</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg-3 text-center ">
+                                    <div class="overview-item overview-item--c2">
+                                        <div class="overview__inner">
+                                            <div class="overview-box clearfix">
+                                                <div class="icon">
+                                                    <i class="zmdi zmdi-shopping-cart"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <%
+                                                    const approvedForms = reqForms.filter(form => form.status === 'settled');
+                                                    const approvedFormsCount = approvedForms.length;
+                                                    %>
+                                                    <% if(reqForms && reqForms.length > 0) { %>
+                                                        <h2><%= approvedFormsCount %></h2>
+                                                    <% } else { %>
+                                                        <h2>0</h2>
+                                                    <% } %>
+                                                    <span>Done Contract</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg-3 text-center">
+                                    <div class="overview-item overview-item--c3">
+                                        <div class="overview__inner">
+                                            <div class="overview-box clearfix">
+                                                <div class="icon">
+                                                    <i class="zmdi zmdi-calendar-note"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <h2><%= submissionCount %>/10</h2>
+                                                    <span>This day</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg-3 text-center">
+                                    <div class="overview-item overview-item--c4">
+                                        <div class="overview__inner">
+                                            <div class="overview-box clearfix">
+                                                <div class="icon">
+                                                    <i class="zmdi zmdi-account-calendar"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <% if(reqForms && reqForms.length > 0) { %>
+                                                        <h2><%= reqForms.length %></h2>
+                                                    <% }else { %>
+                                                        <h2>0</h2>
+                                                    <% } %>
+                                                    <span>Total Request</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- box -->
+
+                        
+                        <!-- Request Approved Start-->
+                        <% if(reqForms && reqForms.some(reqForm => ['approved'].includes(reqForm.status))) { %>
+                        <section class="p-t-20">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="title-5 m-b-35">Approved Forms</h3>
+                                        <div class="table-data__tool">
+                                            <div class="table-data__tool-left">
+                                                <div class="rs-select2--light rs-select2--md">
+                                                    <select class="js-select2" name="property">
+                                                        <option selected="selected">All Properties</option>
+                                                        <option value="">Option 1</option>
+                                                        <option value="">Option 2</option>
+                                                    </select>
+                                                    <div class="dropDownSelect2"></div>
+                                                </div>
+                                                <div class="rs-select2--light rs-select2--sm">
+                                                    <select class="js-select2" name="time">
+                                                        <option selected="selected">Today</option>
+                                                        <option value="">3 Days</option>
+                                                        <option value="">1 Week</option>
+                                                    </select>
+                                                    <div class="dropDownSelect2"></div>
+                                                </div>
+                                                <button class="au-btn-filter">
+                                                    <i class="zmdi zmdi-filter-list"></i>filters</button>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive table-responsive-data2">
+                                            <table class="table table-data2 text-center" style="white-space: nowrap;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Requested By</th>
+                                                        <th>assign Name</th>
+                                                        <th>email</th>
+                                                        <th>Date Approved</th>
+                                                        <th>form</th>
+                                                        <th>status</th>
+                                                        <th>requestor</th>
+                                                        <th>End Contract</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- request && modal Loop start -->
+                                                    <% if(reqForms && reqForms.length > 0) { %>
+                                                        <% for (let i = 0; i < reqForms.length; i++) { %>
+                                                            <% const reqForm = reqForms[i]; %>
+                                                            <% if(reqForm.status === 'approved') { %>
+                                                                <% const user = users.find(user => user._id.toString() === reqForm.userId.toString()); %>
+                                                                <% if(user) { %>
+                                                                    <!-- Include the partial template -->
+                                                                    <%- include('partials/request_form/creator_single_form_remove.ejs', { reqForm: reqForm, user: user }); %>
+                                                                <% } %>
+                                                            <% } %>
+                                                        <% } %>
+                                                    <% } else { %>
+                                                        <p>No requests found.</p>
+                                                    <% } %>
+                                                    <!-- request && modal Loop end -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <% } %>
+                        <!-- Request Approved End--> 
+                        <!-- Request Declined Start-->
+                        <% if(reqForms && reqForms.some(reqForm => ['declined'].includes(reqForm.status))) { %>
+                            <section class="p-t-20">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h3 class="title-5 m-b-35">Declined Forms</h3>
+                                            <div class="table-data__tool">
+                                                <div class="table-data__tool-left">
+                                                    <div class="rs-select2--light rs-select2--md">
+                                                        <select class="js-select2" name="property">
+                                                            <option selected="selected">All Properties</option>
+                                                            <option value="">Option 1</option>
+                                                            <option value="">Option 2</option>
+                                                        </select>
+                                                        <div class="dropDownSelect2"></div>
+                                                    </div>
+                                                    <div class="rs-select2--light rs-select2--sm">
+                                                        <select class="js-select2" name="time">
+                                                            <option selected="selected">Today</option>
+                                                            <option value="">3 Days</option>
+                                                            <option value="">1 Week</option>
+                                                        </select>
+                                                        <div class="dropDownSelect2"></div>
+                                                    </div>
+                                                    <button class="au-btn-filter">
+                                                        <i class="zmdi zmdi-filter-list"></i>filters</button>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive table-responsive-data2">
+                                                <table class="table table-data2 text-center" style="white-space: nowrap;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Requested By</th>
+                                                            <th>assign Name</th>
+                                                            <th>email</th>
+                                                            <th>form</th>
+                                                            <th>status</th>
+                                                            <th>requestor</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!-- request && modal Loop start -->
+                                                        <% if(reqForms && reqForms.length > 0) { %>
+                                                            <% for (let i = 0; i < reqForms.length; i++) { %>
+                                                                <% const reqForm = reqForms[i]; %>
+                                                                <% if(reqForm.status === 'declined') { %>
+                                                                    <% const user = users.find(user => user._id.toString() === reqForm.userId.toString()); %>
+                                                                    <% if(user) { %>
+                                                                        <!-- Include the partial template -->
+                                                                        <%- include('partials/request_form/creator_single_form_remove.ejs', { reqForm: reqForm, user: user }); %>
+                                                                    <% } %>
+                                                                <% } %>
+                                                            <% } %>
+                                                        <% } else { %>
+                                                            <p>No requests found.</p>
+                                                        <% } %>
+                                                        <!-- request && modal Loop end -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        <% } %>
+                        <!-- Request Decline End-->        
+                        <!-- Request Process Start-->
+                        <% if (reqForms && reqForms.length > 0 && reqForms.some(reqForm => reqForm.status === 'process')) { %>
+                        <section class="p-t-50">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="title-5 m-b-35">Request Process</h3>
+                                        <div class="table-data__tool">
+                                            <div class="table-data__tool-left">
+                                                <div class="rs-select2--light rs-select2--md">
+                                                    <select class="js-select2" name="property">
+                                                        <option selected="selected">All Properties</option>
+                                                        <option value="">Option 1</option>
+                                                        <option value="">Option 2</option>
+                                                    </select>
+                                                    <div class="dropDownSelect2"></div>
+                                                </div>
+                                                <div class="rs-select2--light rs-select2--sm">
+                                                    <select class="js-select2" name="time">
+                                                        <option selected="selected">Today</option>
+                                                        <option value="">3 Days</option>
+                                                        <option value="">1 Week</option>
+                                                    </select>
+                                                    <div class="dropDownSelect2"></div>
+                                                </div>
+                                                <button class="au-btn-filter">
+                                                    <i class="zmdi zmdi-filter-list"></i>filters</button>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive table-responsive-data2">
+                                            <table class="table table-data2 text-center" style="white-space: nowrap;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Requested By</th>
+                                                        <th>assign Name</th>
+                                                        <th>email</th>
+                                                        <th>date</th>
+                                                        <th>form</th>
+                                                        <th>status</th>
+                                                        <th>requestor</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- request && modal Loop start -->
+                                                    <% if(reqForms && reqForms.length > 0) { %>
+                                                        <% for (let i = 0; i < reqForms.length; i++) { %>
+                                                            <% const reqForm = reqForms[i]; %>
+                                                            <% if(reqForm.status === 'process') { %>
+                                                                <% const user = users.find(user => user._id.toString() === reqForm.userId.toString()); %>
+                                                                <% if(user) { %>
+                                                                    <!-- Include the partial template -->
+                                                                    <%- include('partials/request_form/creator_single_form_remove.ejs', { reqForm: reqForm, user: user }); %>
+                                                                <% } %>
+                                                            <% } %>
+                                                        <% } %>
+                                                    <% } else { %>
+                                                        <p>No requests found.</p>
+                                                    <% } %>
+                                                    <!-- request && modal Loop end -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <% } %>
+                        <!-- Request Process End-->
+                            
+                        <!-- Request List-->
+                        <section class="p-t-80">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="title-5 m-b-35">Requesting Form</h3>
+                                        <!-- <div class="table-data__tool">
+                                            <div class="table-data__tool-left">
+                                                <div class="rs-select2--light rs-select2--md">
+                                                    <select class="js-select2" name="property">
+                                                        <option selected="selected">All Properties</option>
+                                                        <option value="">Option 1</option>
+                                                        <option value="">Option 2</option>
+                                                    </select>
+                                                    <div class="dropDownSelect2"></div>
+                                                </div>
+                                                <div class="rs-select2--light rs-select2--sm">
+                                                    <select class="js-select2" name="time">
+                                                        <option selected="selected">Today</option>
+                                                        <option value="">3 Days</option>
+                                                        <option value="">1 Week</option>
+                                                    </select>
+                                                    <div class="dropDownSelect2"></div>
+                                                </div>
+                                                <button class="au-btn-filter">
+                                                    <i class="zmdi zmdi-filter-list"></i>filters</button>
+                                            </div>
+                                        </div> -->
+                                        <% if (reqForms && reqForms.length > 0 && reqForms.some(reqForm => reqForm.status === 'pending')) { %>
+                                        <div class="table-responsive table-responsive-data2">
+                                            <table class="table table-data2 text-center" style="white-space: nowrap;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Requested By</th>
+                                                        <th>assign</th>
+                                                        <th>email</th>
+                                                        <th>date</th>
+                                                        <th>form</th>
+                                                        <th>status</th>
+                                                        <th>requestor</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- request && modal Loop start -->
+                                                    <% if(reqForms && reqForms.length > 0) { %>
+                                                        <% for (let i = 0; i < reqForms.length; i++) { %>
+                                                            <% const reqForm = reqForms[i]; %>
+                                                            <% if(reqForm.status === 'pending') { %>
+                                                                <% const user = users.find(user => user._id.toString() === reqForm.userId.toString()); %>
+                                                                <% if(user) { %>
+                                                                    <!-- Include the partial template -->
+                                                                    <%- include('partials/request_form/creator_single_form.ejs', { reqForm: reqForm, user: user }); %>
+                                                                <% } %>
+                                                            <% } %>
+                                                        <% } %>
+                                                    <% } else { %>
+                                                        <p>No requests found.</p>
+                                                    <% } %>
+                                                    
+                                                    <!-- request && modal Loop end -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <% } else{ %>
+                                            <p class="text-center"> No Request Found</p>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- END DATA request list TABLE-->
+                        <!-- Request Settled Start-->
+                        <% if(reqForms && reqForms.some(reqForm => ['settled'].includes(reqForm.status))) { %>
+                            <section class="p-t-80">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h3 class="title-5 m-b-35">Settled Forms</h3>
+                                            <div class="table-data__tool">
+                                                <div class="table-data__tool-left">
+                                                    <div class="rs-select2--light rs-select2--md">
+                                                        <select class="js-select2" name="property">
+                                                            <option selected="selected">All Properties</option>
+                                                            <option value="">Option 1</option>
+                                                            <option value="">Option 2</option>
+                                                        </select>
+                                                        <div class="dropDownSelect2"></div>
+                                                    </div>
+                                                    <div class="rs-select2--light rs-select2--sm">
+                                                        <select class="js-select2" name="time">
+                                                            <option selected="selected">Today</option>
+                                                            <option value="">3 Days</option>
+                                                            <option value="">1 Week</option>
+                                                        </select>
+                                                        <div class="dropDownSelect2"></div>
+                                                    </div>
+                                                    <button class="au-btn-filter">
+                                                        <i class="zmdi zmdi-filter-list"></i>filters</button>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive table-responsive-data2">
+                                                <table class="table table-data2 text-center" style="white-space: nowrap;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Requested By</th>
+                                                            <th>assign Name</th>
+                                                            <th>email</th>
+                                                            <th>form</th>
+                                                            <th>status</th>
+                                                            <th>requestor</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!-- request && modal Loop start -->
+                                                        <% if(reqForms && reqForms.length > 0) { %>
+                                                            <% for (let i = 0; i < reqForms.length; i++) { %>
+                                                                <% const reqForm = reqForms[i]; %>
+                                                                <% if(reqForm.status === 'settled') { %>
+                                                                    <% const user = users.find(user => user._id.toString() === reqForm.userId.toString()); %>
+                                                                    <% if(user) { %>
+                                                                        <!-- Include the partial template -->
+                                                                        <%- include('partials/request_form/creator_single_form_remove.ejs', { reqForm: reqForm, user: user }); %>
+                                                                    <% } %>
+                                                                <% } %>
+                                                            <% } %>
+                                                        <% } else { %>
+                                                            <p>No requests found.</p>
+                                                        <% } %>
+                                                        <!-- request && modal Loop end -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        <% } %>
+                        <!-- Request Settled End--> 
+                                <!-- request modal start -->
+                                <%- include('./partials/modal/modal_request.ejs', { vehicles:vehicles}); %>
+                                    <!-- request modal end-->
+
+                                    <!-- Vechicles List-->
+                                    <section class="p-t-70">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h3 class="title-5 m-b-35">LGU Motor Pool Vehicles</h3>
+                                                    <div class="table-data__tool">
+                                                        <div class="table-data__tool-left">
+                                                            <div class="rs-select2--light rs-select2--md">
+                                                                <select id="categorySelect" class="js-select2" name="property" onchange="filterVehicles()">
+                                                                    <option  value="All Categories" >All Categories
+                                                                    </option>
+                                                                    <option value="Motorcycle Vehicles">Motorcycle</option>
+                                                                    <option value="Military Vehicles">Military</option>
+                                                                    <option value="Heavy Equipment Vehicles">Heavy Equipment</option>
+                                                                    <option value="4-Wheel Vehicles">4-Wheel</option>
+                                                                </select>
+                                                                <div class="dropDownSelect2"></div>
+                                                            </div>
+                                                            <div class="rs-select2--light rs-select2--sm">
+                                                                <select id="statusSelect" class="js-select2" name="time" onchange="filterVehicles()">
+                                                                    <option value="All Status">All Status</option>
+                                                                    <option value="available">Available</option>
+                                                                    <option value="deployed">Released</option>
+                                                                    <option value="process">Process</option>
+                                                                    <option value="not available">N/A</option>
+                                                                </select>
+                                                                <div class="dropDownSelect2"></div>
+                                                            </div>
+                                                            <button class="au-btn-filter">  <i class="zmdi zmdi-filter-list"></i>filters</button>
+                                                        </div>
+                                                        <div class="table-data__tool-right">
+                                                            <button
+                                                                class="au-btn au-btn-icon au-btn--green au-btn--small"
+                                                                data-toggle="modal" data-target="#createVehicle">
+                                                                <i class="zmdi zmdi-plus"></i>add Car</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- modal scroll -->
+                                                    <div class="modal fade" id="createVehicle" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="scrollmodalLabel">Register Vehicle</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form action="createvehicle" method="post">
+                                                                    <div class="row form-group">
+                                                                        <div class="col col-md-3">
+                                                                            <label for="assignPersonel" class=" form-control-label">Assign Personel</label>
+                                                                        </div>
+                                                                        <div class="col-12 col-md-9">
+                                                                            <input type="text" id="assignPersonel" name="assignPersonel" placeholder="Assign Personel" class="form-control" required/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row form-group">
+                                                                        <div class="col col-md-3">
+                                                                            <label for="brand" class=" form-control-label">Brand</label>
+                                                                        </div>
+                                                                        <div class="col-12 col-md-9">
+                                                                            <input type="text" id="brand" name="brand" placeholder="Brand" class="form-control" required/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row form-group">
+                                                                        <div class="col col-md-3">
+                                                                            <label for="model" class=" form-control-label">Model</label>
+                                                                        </div>
+                                                                        <div class="col-12 col-md-9">
+                                                                            <input type="text" id="model" name="model" placeholder="Model" class="form-control" required/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <input type="hidden" id="qty" name="qty" placeholder="" value="1" class="form-control">
+                                                                    <div class="row form-group">
+                                                                        <div class="col col-md-3">
+                                                                            <label for="plateNumber" class=" form-control-label">Plate Number</label>
+                                                                        </div>
+                                                                        <div class="col-12 col-md-9">
+                                                                            <input type="text" id="plateNumber" name="plateNumber" placeholder="Plate Number"
+                                                                                class="form-control" required/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row form-group">
+                                                                        <div class="col col-md-3">
+                                                                            <label for="OrCr" class=" form-control-label">OR / CR / MIR-NUMBER</label>
+                                                                        </div>
+                                                                        <div class="col-12 col-md-9">
+                                                                            <input type="text" id="OrCr" name="OrCr" placeholder="OR / CR / MIR-NUMBER"
+                                                                                class="form-control" required/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row form-group">
+                                                                        <div class="col col-md-3">
+                                                                            <label for="condition" class=" form-control-label">Condition</label>
+                                                                        </div>
+                                                                        <div class="col-12 col-md-9">
+                                                                            <select name="condition" id="condition" class="form-control" required>
+                                                                                <option value="" disabled selected hidden>Please select</option>
+                                                                                <option value="Serviceable">Serviceable</option>
+                                                                                <option value="Non Serviceable">Non Serviceable</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row form-group">
+                                                                        <div class="col col-md-3">
+                                                                            <label for="category" class=" form-control-label">Category</label>
+                                                                        </div>
+                                                                        <div class="col-12 col-md-9">
+                                                                            <select name="category" id="category" class="form-control" onchange="showTypes()" required>
+                                                                                <option value="" disabled selected hidden> Select Options</option>
+                                                                                <option value="Motorcycle Vehicles">Motorcycle Vehicles</option>
+                                                                                <option value="Heavy Equipment Vehicles">Heavy Equipment Vehicles </option>
+                                                                                <option value="Military Vehicles">Military Vehicles</option>
+                                                                                <option value="4-Wheel Vehicles">4-Wheel Vehicles</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Types of Motorcycles Vehicles -->
+                                                                    <div id="MotorcycleTypes" class="row form-group" style="display: none;">
+                                                                        <div class="col col-md-3">
+                                                                            <label for="typeMotor" class=" form-control-label">Vehicle Type</label>
+                                                                        </div>
+                                                                        <div class="col-12 col-md-9">
+                                                                            <select name="typeMotor" id="typeMotor" class="form-control" required>
+                                                                                <option value="" disabled selected hidden>Please select</option>
+                                                                                <option value="Scooter">Scooter</option>
+                                                                                <option value="Touring">Touring</option>
+                                                                                <option value="Cruiser">Cruiser</option>
+                                                                                <option value="Sportbike">Sportbike</option>
+                                                                                <option value="Dual sport">Dual sport</option>
+                                                                                <option value="Motocross">Motocross</option>
+                                                                                <option value="Standard motorcycle">Standard motorcycle</option>
+                                                                                <option value="Adventure">Adventure</option>
+                                                                                <option value="Naked bike">Naked bike</option>
+                                                                                <option value="Chopper">Chopper</option>
+                                                                                <option value="Cafe racer">Cafe racer</option>
+                                                                                <option value="Scrambler">Scrambler</option>
+                                                                                <option value="Minibike">Minibike</option>
+                                                                                <option value="Bobber">Bobber</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Types of Heavy Equipments Vehicles -->
+                                                                    <div id="HeavyTypes" class="row form-group" style="display: none;">
+                                                                        <div class="col col-md-3">
+                                                                            <label for="typeHeavy" class=" form-control-label">Vehicle Type</label>
+                                                                        </div>
+                                                                        <div class="col-12 col-md-9">
+                                                                            <select name="typeHeavy" id="typeHeavy" class="form-control" required>
+                                                                                <option value="" disabled selected hidden>Please select</option>
+                                                                                <option value="Articulated Truck">Articulated Truck</option>
+                                                                                <option value="Backhoe">Backhoe</option>
+                                                                                <option value="Bulldozer">Bulldozer</option>
+                                                                                <option value="Compactor">Compactor</option>
+                                                                                <option value="Crane">Crane</option>
+                                                                                <option value="Dump Truck">Dump Trucks</option>
+                                                                                <option value="Excavator">Excavator</option>
+                                                                                <option value="Feller Buncher">Feller Buncher</option>
+                                                                                <option value="Grader">Grader</option>
+                                                                                <option value="Loader">Loader</option>
+                                                                                <option value="Paver">Paver</option>
+                                                                                <option value="Road Roller">Road Roller</option>
+                                                                                <option value="Skid-steer loader">Skid-steer loader</option>
+                                                                                <option value="Telescopic Handler">Telescopic Handler</option>
+                                                                                <option value="Tractor">Tractor</option>
+                                                                                <option value="Telehandler">Telehandler</option>
+                                                                                <option value="Trencher">Trencher</option>
+                                                                                <option value="Wheel Tractor Scraper">Wheel Tractor Scraper</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Types of Military Vehicles -->
+                                                                    <div id="MilitaryTypes" class="row form-group" style="display: none;">
+                                                                        <div class="col col-md-3">
+                                                                            <label for="typeMilitary" class=" form-control-label">Vehicle Type</label>
+                                                                        </div>
+                                                                        <div class="col-12 col-md-9">
+                                                                            <select name="typeMilitary" id="typeMilitary" class="form-control" required>
+                                                                                <option value="" disabled selected hidden>Please select</option>
+                                                                                <option value="Armoured Personnel Carrier">Armoured Personnel Carrier</option>
+                                                                                <option value="Fighting Vehicles">Fighting Vehicle</option>
+                                                                                <option value="Tank">Tank</option>
+                                                                                <option value="Light Tactical Vehicle">Light Tactical Vehicle</option>
+                                                                                <option value="MRAP">MRAP</option>
+                                                                                <option value="Amphibious Vehicle">Amphibious Vehicle</option>
+                                                                                <option value="Reconnaissance Vehicle">Reconnaissance Vehicle</option>
+                                                                                <option value="Abram">Abram</option>
+                                                                                <option value="Buffalo">Buffalo</option>
+                                                                                <option value="Cougar">Cougar</option>
+                                                                                <option value="M9 Armored Vehicle">M9 Armored Vehicle</option>
+                                                                                <option value="Military Ambulances">Military Ambulances</option>
+                                                                                <option value="Military Engineering Vehicle">Military Engineering Vehicle</option>
+                                                                                <option value="Stryker">Stryker</option>
+                                                                                <option value="Utility Vehicles">Utility Vehicles</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Types of 4-Wheel Vehicles -->
+                                                                    <div id="WheelTypes" class="row form-group" style="display: none;">
+                                                                        <div class="col col-md-3">
+                                                                            <label for="typeWheel" class=" form-control-label">Vehicle Type</label>
+                                                                        </div>
+                                                                        <div class="col-12 col-md-9">
+                                                                            <select name="typeWheel" id="typeWheel" class="form-control" required>
+                                                                                <option value="" disabled selected hidden>Please select</option>
+                                                                                <option value="Automobile">Automobile</option>
+                                                                                <option value="Ambulance">Ambulance</option>
+                                                                                <option value="ATV">ATV</option>
+                                                                                <option value="Autocycle">Autocycle</option>
+                                                                                <option value="Bus">Bus</option>
+                                                                                <option value="Cabriolet">Cabriolet</option>
+                                                                                <option value="Jeep">Jeep</option>
+                                                                                <option value="Carriage">Carriage</option>
+                                                                                <option value="Van">Van</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cancel</button>
+                                                                        <button type="submit" class="btn btn-primary">Confirm</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    <% if(vehicles && vehicles.length > 0) { %>
+                                                        <div class="table-responsive table-responsive-data2">
+                                                            <table id="vehicleTable" class="table table-data2 text-center" style="white-space: nowrap;">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Assign Personel</th>
+                                                                        <th>brand</th>
+                                                                        <th>category</th>
+                                                                        <th>type</th>
+                                                                        <th>model</th>
+                                                                        <th>status</th>
+                                                                        <th>Actions</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <% vehicles.forEach(vehicle=> { %>
+                                                                        <%- include('./partials/vehicle/creator_single_vehicle.ejs', {vehicle: vehicle}); %>
+                                                                    <% }); %>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <% } else { %>
+                                        <p class="text-center">No Vehicles Available.</p>
+                                        <% } %>
+                                        
+                                            <!-- END DATA TABLE-->
+                                    
+                                    <%- include('./partials/modal/modal_vehicle.ejs'); %>
+
+
+                                    <%- include('./partials/copyright/copyright.ejs'); %>
+                </div>
+    </div>
+    <%- include('partials/footer/footer.ejs'); %>
+        <% } %>

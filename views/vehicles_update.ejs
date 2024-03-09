@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title><%= title %> | <%= site_title %></title>
+
+    <!-- Fontfaces CSS-->
+    <link href="/public/css/font-face.css" rel="stylesheet" media="all">
+    <link href="/public/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/public/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/public/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="/public/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="/public/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="/public/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="/public/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="/public/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="/public/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="/public/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="/public/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="/public/css/theme.css" rel="stylesheet" media="all">
+
+</head>
+
+    <body class="">
+        <div class="page-wrapper">
+            <%- include('partials/nav_bar/nav.ejs');  %>
+                <%- include('partials/nav_bar/nav_mobile.ejs');  %>
+                <%- include('./partials/nav_bar/nav_mobile_bottom.ejs'); %>
+                    <!-- END HEADER MOBILE -->
+
+                    <!-- PAGE CONTENT-->
+                    <div class="page-content--bgf7">
+                        <!-- BREADCRUMB-->
+                        <section class="au-breadcrumb2">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="au-breadcrumb-content">
+                                            <div class="au-breadcrumb-left">
+                                                <span class="au-breadcrumb-span">You are here:</span>
+                                                <ul class="list-unstyled list-inline au-breadcrumb__list">
+                                                    <li class="list-inline-item active">
+                                                        <a href="#">Home</a>
+                                                    </li>
+                                                    <li class="list-inline-item seprate">
+                                                        <span>/</span>
+                                                    </li>
+                                                    <li class="list-inline-item">Update</li>
+                                                </ul>
+                                            </div>
+                                            <form class="au-form-icon--sm" action="" method="post">
+                                                <input class="au-input--w300 au-input--style2" type="text"
+                                                    placeholder="Search for datas &amp; reports...">
+                                                <button class="au-btn--submit2" type="submit">
+                                                    <i class="zmdi zmdi-search"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- END BREADCRUMB-->
+
+                        <%- include('./partials/welcome/welcome.ejs'); %>
+                        
+                        <div class="container-fluid ">
+                            <div class="row justify-content-center align-items-center">
+                                <div class="col-lg-6 p-t-40">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Vehicle Update</strong>
+                                        </div>
+                                        <form action="<%= vehicle._id %>" method="post">
+                                            <div class="card-body card-block">
+                                                <div class="form-group">
+                                                    <label for="assignPersonel" class=" form-control-label">Assign Personel</label>
+                                                    <input type="text" id="assignPersonel" name="assignPersonel" placeholder="Enter Assign Personel" class="form-control" value="<%= vehicle.assignPersonel %>" required/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="brand" class=" form-control-label">Brand</label>
+                                                    <input type="text" id="brand" name="brand" placeholder="Enter Brand" class="form-control" value="<%= vehicle.brand %>" required/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="model" class=" form-control-label">Model</label>
+                                                    <input type="text" id="model" name="model" placeholder="Enter model" class="form-control" value="<%= vehicle.model %>" required/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="plateNumber" class=" form-control-label">Plate Number</label>
+                                                    <input type="text" id="plateNumber" name="plateNumber" placeholder="Enter Plate Number" class="form-control" value="<%= vehicle.plateNumber %>" required/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="OrCr" class=" form-control-label">OR /CR / MIR-NUMBER</label>
+                                                    <input type="text" id="OrCr" name="OrCr" placeholder="Enter OR /CR / MIR-NUMBER" class="form-control" value="<%= vehicle.OrCr %>" required/>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col col-md-3">
+                                                        <label for="condition" class=" form-control-label">Condition</label>
+                                                    </div>
+                                                    <div class="col-12 col-md-9">
+                                                        <select name="condition" id="condition" class="form-control" required>
+                                                            <option value="Serviceable" <% if (vehicle.condition == 'Serviceable') { %> selected <% } %>>Serviceable</option>
+                                                            <option value="Non Serviceable" <% if (vehicle.condition == 'Non Serviceable') { %> selected <% } %>>Non Serviceable</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col col-md-3">
+                                                        <label for="category" class=" form-control-label">Category</label>
+                                                    </div>
+                                                    <div class="col-12 col-md-9">
+                                                        <select name="category" id="category" class="form-control" onchange="showTypesEdit()" required>
+                                                            <option value="Motorcycle Vehicles" <% if (vehicle.category == 'Motorcycle Vehicles') { %> selected <% } %>>Motorcycle Vehicles</option>
+                                                            <option value="Heavy Equipment Vehicles" <% if (vehicle.category == 'Heavy Equipment Vehicles') { %> selected <% } %>>Heavy Equipment Vehicles </option>
+                                                            <option value="Military Vehicles" <% if (vehicle.category == 'Military Vehicles') { %> selected <% } %>>Military Vehicles</option>
+                                                            <option value="4-Wheel Vehicles" <% if (vehicle.category == '4-Wheel Vehicles') { %> selected <% } %>>4-Wheel Vehicles</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- Types of Motorcycles Vehicles -->
+                                                <div id="MotorcycleTypes" class="row form-group" <% if (vehicle.category != 'Motorcycle Vehicles') { %> style="display: none;" <% } %>>
+                                                    <div class="col col-md-3">
+                                                        <label for="typeMotor" class=" form-control-label">Vehicle Type</label>
+                                                    </div>
+                                                    <div class="col-12 col-md-9">
+                                                        <select name="typeMotor" id="typeMotor" class="form-control" required>
+                                                            <option value="" disabled hidden <% if (vehicle.category != 'Motorcycle Vehicles') { %> selected <% } %>>Please select</option>
+                                                            <option value="Scooter" <% if (vehicle.type == 'Scooter') { %> selected <% } %>>Scooter</option>
+                                                            <option value="Touring" <% if (vehicle.type == 'Touring') { %> selected <% } %>>Touring</option>
+                                                            <option value="Cruiser" <% if (vehicle.type == 'Cruiser') { %> selected <% } %>>Cruiser</option>
+                                                            <option value="Sportbike" <% if (vehicle.type == 'Sportbike') { %> selected <% } %>>Sportbike</option>
+                                                            <option value="Dual sport" <% if (vehicle.type == 'Dual sport') { %> selected <% } %>>Dual sport</option>
+                                                            <option value="Motocross" <% if (vehicle.type == 'Motocross') { %> selected <% } %>>Motocross</option>
+                                                            <option value="Standard motorcycle" <% if (vehicle.type == 'Standard motorcycle') { %> selected <% } %>>Standard motorcycle</option>
+                                                            <option value="Adventure" <% if (vehicle.type == 'Adventure') { %> selected <% } %>>Adventure</option>
+                                                            <option value="Naked bike" <% if (vehicle.type == 'Naked bike') { %> selected <% } %>>Naked bike</option>
+                                                            <option value="Chopper" <% if (vehicle.type == 'Chopper') { %> selected <% } %>>Chopper</option>
+                                                            <option value="Cafe racer" <% if (vehicle.type == 'Cafe racer') { %> selected <% } %>>Cafe racer</option>
+                                                            <option value="Scrambler" <% if (vehicle.type == 'Scrambler') { %> selected <% } %>>Scrambler</option>
+                                                            <option value="Minibike" <% if (vehicle.type == 'Minibike') { %> selected <% } %>>Minibike</option>
+                                                            <option value="Bobber" <% if (vehicle.type == 'Bobber') { %> selected <% } %>>Bobber</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- Types of Heavy Equipments Vehicles -->
+                                                <div id="HeavyTypes" class="row form-group" <% if (vehicle.category != 'Heavy Equipment Vehicles') { %> style="display: none;" <% } %>>
+                                                    <div class="col col-md-3">
+                                                        <label for="typeHeavy" class=" form-control-label">Vehicle Type</label>
+                                                    </div>
+                                                    <div class="col-12 col-md-9">
+                                                        <select name="typeHeavy" id="typeHeavy" class="form-control" required>
+                                                            <option value="" disabled hidden <% if (vehicle.category != 'Heavy Equipment Vehicles') { %> selected <% } %>>Please select</option>
+                                                            <option value="Articulated Truck" <% if (vehicle.type == 'Articulated Truck') { %> selected <% } %>>Articulated Truck</option>
+                                                            <option value="Backhoe" <% if (vehicle.type == 'Backhoe') { %> selected <% } %>>Backhoe</option>
+                                                            <option value="Bulldozer" <% if (vehicle.type == 'Bulldozer') { %> selected <% } %>>Bulldozer</option>
+                                                            <option value="Compactor" <% if (vehicle.type == 'Compactor') { %> selected <% } %>>Compactor</option>
+                                                            <option value="Crane" <% if (vehicle.type == 'Crane') { %> selected <% } %>>Crane</option>
+                                                            <option value="Dump Truck" <% if (vehicle.type == 'Dump Truck') { %> selected <% } %>>Dump Trucks</option>
+                                                            <option value="Excavator" <% if (vehicle.type == 'Excavator') { %> selected <% } %>>Excavator</option>
+                                                            <option value="Feller Buncher" <% if (vehicle.type == 'Feller Buncher') { %> selected <% } %>>Feller Buncher</option>
+                                                            <option value="Grader" <% if (vehicle.type == 'Grader') { %> selected <% } %>>Grader</option>
+                                                            <option value="Loader" <% if (vehicle.type == 'Loader') { %> selected <% } %>>Loader</option>
+                                                            <option value="Paver" <% if (vehicle.type == 'Paver') { %> selected <% } %>>Paver</option>
+                                                            <option value="Road Roller" <% if (vehicle.type == 'Road Roller') { %> selected <% } %>>Road Roller</option>
+                                                            <option value="Skid-steer loader" <% if (vehicle.type == 'Skid-steer loader') { %> selected <% } %>>Skid-steer loader</option>
+                                                            <option value="Telescopic Handler" <% if (vehicle.type == 'Telescopic Handler') { %> selected <% } %>>Telescopic Handler</option>
+                                                            <option value="Tractor" <% if (vehicle.type == 'Tractor') { %> selected <% } %>>Tractor</option>
+                                                            <option value="Telehandler" <% if (vehicle.type == 'Telehandler') { %> selected <% } %>>Telehandler</option>
+                                                            <option value="Trencher" <% if (vehicle.type === 'Trencher') { %> selected <% } %>>Trencher</option>
+                                                            <option value="Wheel Tractor Scraper" <% if (vehicle.type == 'Wheel Tractor Scraper') { %> selected <% } %>>Wheel Tractor Scraper</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- Types of Military Vehicles -->
+                                                <div id="MilitaryTypes" class="row form-group" <% if (vehicle.category != 'Military Vehicles') { %> style="display: none;" <% } %>>
+                                                    <div class="col col-md-3">
+                                                        <label for="typeMilitary" class=" form-control-label">Vehicle Type</label>
+                                                    </div>
+                                                    <div class="col-12 col-md-9">
+                                                        <select name="typeMilitary" id="typeMilitary" class="form-control" required>
+                                                            <option value="" disabled hidden <% if (vehicle.category != 'Military Vehicles') { %> selected <% } %>>Please select</option>
+                                                            <option value="Armoured Personnel Carrier" <% if (vehicle.type == 'Armoured Personnel Carrier') { %> selected <% } %>>Armoured Personnel Carrier</option>
+                                                            <option value="Fighting Vehicles" <% if (vehicle.type == 'Fighting Vehicles') { %> selected <% } %>>Fighting Vehicle</option>
+                                                            <option value="Tank" <% if (vehicle.type == 'Tank') { %> selected <% } %>>Tank</option>
+                                                            <option value="Light Tactical Vehicle" <% if (vehicle.type == 'Light Tactical Vehicle') { %> selected <% } %>>Light Tactical Vehicle</option>
+                                                            <option value="MRAP" <% if (vehicle.type == 'MRAP') { %> selected <% } %>>MRAP</option>
+                                                            <option value="Amphibious Vehicle" <% if (vehicle.type == 'Amphibious Vehicle') { %> selected <% } %>>Amphibious Vehicle</option>
+                                                            <option value="Reconnaissance Vehicle" <% if (vehicle.type == 'Reconnaissance Vehicle') { %> selected <% } %>>Reconnaissance Vehicle</option>
+                                                            <option value="Abram" <% if (vehicle.type == 'Abram') { %> selected <% } %>>Abram</option>
+                                                            <option value="Buffalo" <% if (vehicle.type == 'Buffalo') { %> selected <% } %>>Buffalo</option>
+                                                            <option value="Cougar" <% if (vehicle.type == 'Cougar') { %> selected <% } %>>Cougar</option>
+                                                            <option value="M9 Armored Vehicle" <% if (vehicle.type == 'M9 Armored Vehicle') { %> selected <% } %>>M9 Armored Vehicle</option>
+                                                            <option value="Military Ambulances" <% if (vehicle.type == 'Military Ambulances') { %> selected <% } %>>Military Ambulances</option>
+                                                            <option value="Military Engineering Vehicle" <% if (vehicle.type == 'Military Engineering Vehicle') { %> selected <% } %>>Military Engineering Vehicle</option>
+                                                            <option value="Stryker" <% if (vehicle.type == 'Stryker') { %> selected <% } %>>Stryker</option>
+                                                            <option value="Utility Vehicles" <% if (vehicle.type == 'Utility Vehicles') { %> selected <% } %>>Utility Vehicles</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- Types of 4-Wheel Vehicles -->
+                                                <div id="WheelTypes" class="row form-group" <% if (vehicle.category != '4-Wheel Vehicles') { %> style="display: none;" <% } %>>
+                                                    <div class="col col-md-3">
+                                                        <label for="typeWheel" class=" form-control-label">Vehicle Type</label>
+                                                    </div>
+                                                    <div class="col-12 col-md-9">
+                                                        <select name="typeWheel" id="typeWheel" class="form-control" required>
+                                                            <option value="" disabled hidden <% if (vehicle.category != '4-Wheel Vehicles') { %> selected <% } %>>Please select</option>
+                                                            <option value="Automobile" <% if (vehicle.type == 'Automobile') { %> selected <% } %>>Automobile</option>
+                                                            <option value="Ambulance" <% if (vehicle.type == 'Ambulance') { %> selected <% } %>>Ambulance</option>
+                                                            <option value="ATV" <% if (vehicle.type == 'ATV') { %> selected <% } %>>ATV</option>
+                                                            <option value="Autocycle" <% if (vehicle.type == 'Autocycle') { %> selected <% } %>>Autocycle</option>
+                                                            <option value="Bus" <% if (vehicle.type == 'Bus') { %> selected <% } %>>Bus</option>
+                                                            <option value="Cabriolet" <% if (vehicle.type == 'Cabriolet') { %> selected <% } %>>Cabriolet</option>
+                                                            <option value="Jeep" <% if (vehicle.type == 'Jeep') { %> selected <% } %>>Jeep</option>
+                                                            <option value="Carriage" <% if (vehicle.type == 'Carriage') { %> selected <% } %>>Carriage</option>
+                                                            <option value="Van" <% if (vehicle.type == 'Van') { %> selected <% } %>>Van</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-actions form-group text-right">
+                                                    <button type="submit" class="btn btn-success btn-sm">Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <%- include('./partials/copyright/copyright.ejs'); %>
+                    </div>
+        </div>
+
+    </body>
+    <script>
+        <% if (messages.message) { %>
+            window.alert('<%= messages.message %>');
+        <% } %>
+        
+        function showTypesEdit() {
+    const category = document.getElementById("category").value;
+    //options
+    const motorcycleTypes = document.getElementById("MotorcycleTypes");
+    const heavyTypes = document.getElementById("HeavyTypes");
+    const MilitaryTypes = document.getElementById("MilitaryTypes");
+    const WheelTypes = document.getElementById("WheelTypes");
+    // Hide all types initially
+    motorcycleTypes.style.display = "none";
+    heavyTypes.style.display = "none";
+    MilitaryTypes.style.display = "none";
+    WheelTypes.style.display = "none";
+
+    // Show types based on selected category
+    if (category === "Motorcycle Vehicles") {
+        motorcycleTypes.style.display = "flex";
+        document.getElementById("typeMotor").setAttribute("required", "true");
+    } else {
+        document.getElementById("typeMotor").removeAttribute("required");
+    }
+    if (category === "Heavy Equipment Vehicles") {
+        heavyTypes.style.display = "flex";
+        document.getElementById("typeHeavy").setAttribute("required", "true");
+    } else {
+        document.getElementById("typeHeavy").removeAttribute("required");
+    }
+    if (category === "Military Vehicles") {
+        MilitaryTypes.style.display = "flex";
+        document.getElementById("typeMilitary").setAttribute("required", "true");
+    } else {
+        document.getElementById("typeMilitary").removeAttribute("required");
+    }
+    if (category === "4-Wheel Vehicles") {
+        WheelTypes.style.display = "flex";
+        document.getElementById("typeWheel").setAttribute("required", "true");
+    } else {
+        document.getElementById("typeWheel").removeAttribute("required");
+    }
+    }
+    window.addEventListener('DOMContentLoaded', (event) => {
+        showTypesEdit();
+    });
+    </script>
+     <!-- Jquery JS-->
+     <script src="/public/vendor/jquery-3.2.1.min.js"></script>
+     <!-- Bootstrap JS-->
+     <script src="public/vendor/bootstrap-4.1/popper.min.js"></script>
+     <script src="/public/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+     <!-- Vendor JS       -->
+     <script src="/public/vendor/slick/slick.min.js">
+     </script>
+     <script src="/public/vendor/wow/wow.min.js"></script>
+     <script src="/public/vendor/animsition/animsition.min.js"></script>
+     <script src="/public/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+     </script>
+     <script src="/public/vendor/counter-up/jquery.waypoints.min.js"></script>
+     <script src="/public/vendor/counter-up/jquery.counterup.min.js">
+     </script>
+     <script src="/public/vendor/circle-progress/circle-progress.min.js"></script>
+     <script src="/public/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+     <script src="/public/vendor/chartjs/Chart.bundle.min.js"></script>
+     <script src="/public/vendor/select2/select2.min.js">
+     </script>
+    
+     <!-- Main JS-->
+     <script src="/public/js/main.js"></script>
+    </html>
+    <!-- end document-->
